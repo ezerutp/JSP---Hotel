@@ -1,0 +1,60 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 19 abr 2025, 0:22:52
+    Author     : josue
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #2e5b9c;
+    color: white;
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.contenido-destino {
+    padding: 30px;
+}
+
+.destino-info img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.tour-lista ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tour-lista li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.galeria img {
+    width: 30%;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+footer {
+    background-color: #2e5b9c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+
