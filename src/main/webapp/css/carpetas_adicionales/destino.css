@@ -1,0 +1,15 @@
+/* Contenedor de destinos */
+.destinos-contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+/* Hero específico */
+.hero-destino {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('../imagenes/banner/destino-hero.jpg');
+    background-size: cover;
+    background-position: center;
+}

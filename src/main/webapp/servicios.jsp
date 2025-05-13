@@ -11,6 +11,9 @@
     <meta charset="UTF-8">
     <title>Servicios - Hotel Cusco Mágico</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/componentes/tarjetas.css">
+    <link rel="stylesheet" href="css/carpetas_adicionales/servicios.css">
 </head>
 <body>
 
