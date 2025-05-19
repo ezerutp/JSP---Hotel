@@ -2,7 +2,7 @@ package com.utp.proceso1.modelo;
 
 import java.util.Date;
 
-import com.utp.proceso1.utilades.EnumHotel.estadoReserva;
+import com.utp.proceso1.utilidades.EnumHotel.estadoReserva;
 
 public class Reserva {
     private int id;

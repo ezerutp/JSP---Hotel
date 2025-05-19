@@ -1,4 +1,4 @@
-package com.utp.proceso1.utilades;
+package com.utp.proceso1.utilidades;
 
 public class EnumHotel {
     
@@ -20,5 +20,10 @@ public class EnumHotel {
         EFECTIVO,
         TARJETA,
         TRANSFERENCIA
+    }
+
+    public static enum tipoRol {
+        ADMIN,
+        RECEPCIONISTA
     }
 }

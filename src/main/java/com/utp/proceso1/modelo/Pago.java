@@ -2,7 +2,7 @@ package com.utp.proceso1.modelo;
 
 import java.util.Date;
 
-import com.utp.proceso1.utilades.EnumHotel.metodoPago;
+import com.utp.proceso1.utilidades.EnumHotel.metodoPago;
 
 public class Pago {
     private int id;

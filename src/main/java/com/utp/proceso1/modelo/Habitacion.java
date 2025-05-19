@@ -1,6 +1,6 @@
 package com.utp.proceso1.modelo;
 
-import com.utp.proceso1.utilades.EnumHotel.estadoHabitacion;
+import com.utp.proceso1.utilidades.EnumHotel.estadoHabitacion;
 
 public class Habitacion {
     private int id;
