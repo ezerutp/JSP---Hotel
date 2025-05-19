@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="../imagenes_java/desayuno.jpg" class="card-img-top" alt="Desayuno incluido">
+                <img src="imagenes_servicios/desayuno_incluido.png" class="card-img-top" alt="Desayuno incluido">
                 <div class="card-body">
                     <h5 class="card-title">Desayuno Incluido</h5>
                     <p class="card-text">Disfruta de un delicioso desayuno continental todas las mañanas sin costo adicional.</p>
@@ -34,7 +34,7 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="../imagenes_java/wifi.png" class="card-img-top" alt="Wifi gratis">
+                <img src="imagenes_servicios/wifi2.png" class="card-img-top" alt="Wifi gratis">
                 <div class="card-body">
                     <h5 class="card-title">Wi-Fi Gratis</h5>
                     <p class="card-text">Mantente conectado durante tu estadía con acceso a internet de alta velocidad en todo el hotel.</p>
@@ -44,7 +44,7 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="img/transporte.jpg" class="card-img-top" alt="Transporte al aeropuerto">
+                <img src="imagenes_servicios/trasporte2.png" class="card-img-top" alt="Transporte al aeropuerto">
                 <div class="card-body">
                     <h5 class="card-title">Transporte al Aeropuerto</h5>
                     <p class="card-text">Ofrecemos servicio de traslado desde y hacia el aeropuerto para mayor comodidad.</p>
@@ -57,7 +57,7 @@
     <div class="row mt-3">
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="img/recepcion.jpg" class="card-img-top" alt="Recepción 24/7">
+                <img src="imagenes_servicios/recepcion.png" class="card-img-top" alt="Recepción 24/7">
                 <div class="card-body">
                     <h5 class="card-title">Recepción 24/7</h5>
                     <p class="card-text">Nuestro personal está disponible las 24 horas del día para asistirte en todo momento.</p>
@@ -67,7 +67,7 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="img/tours.jpg" class="card-img-top" alt="Tours turísticos">
+                <img src="imagenes_servicios/tours2.png" class="card-img-top" alt="Tours turísticos">
                 <div class="card-body">
                     <h5 class="card-title">Tours Turísticos</h5>
                     <p class="card-text">Organizamos tours a Machu Picchu, Valle Sagrado y otras atracciones de Cusco.</p>
@@ -77,7 +77,7 @@
 
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="img/limpieza.jpg" class="card-img-top" alt="Limpieza diaria">
+                <img src="imagenes_servicios/limpieza.png" class="card-img-top" alt="Limpieza diaria">
                 <div class="card-body">
                     <h5 class="card-title">Limpieza Diaria</h5>
                     <p class="card-text">Tu habitación siempre impecable con nuestro servicio de limpieza diario.</p>

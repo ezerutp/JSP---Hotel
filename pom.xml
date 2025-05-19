@@ -5,7 +5,7 @@
     <artifactId>Proceso1</artifactId>
     <version>1</version>
     <packaging>war</packaging>
-    <name>Proceso1-1</name>
+    <name>AProyecto_Original</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,12 +22,6 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.32</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
     

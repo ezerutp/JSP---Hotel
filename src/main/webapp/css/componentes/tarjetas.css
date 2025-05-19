@@ -1,19 +1,26 @@
-/* css/componentes/tarjetas.css */
+/* Estilos base para TODAS las tarjetas de tu sitio */
 .tarjeta {
     background: white;
-    border-radius: 0.5rem;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: none;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .tarjeta:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.tarjeta-imagen {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .tarjeta-cuerpo {
@@ -23,15 +30,9 @@
     flex-direction: column;
 }
 
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #f8f9fa;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1.5rem auto 1rem;
-    font-size: 24px;
-    color: #6f42c1;
+.tarjeta-cuerpo h3 {
+    margin-bottom: 0.75rem;
+    color: #003366;
+    font-size: 1.25rem;
 }
+

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : destino
-    Created on : 18 abr 2025, 23:41:26
-    Author     : josue
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,21 +11,25 @@
     <link rel="stylesheet" href="css/componentes/botones.css">
     <link rel="stylesheet" href="css/componentes/tarjetas.css">
     <link rel="stylesheet" href="css/carpetas_adicionales/destino.css">
-    
+    <style>
+        /* ESTILO MÍNIMO PARA LA IMAGEN DE FONDO */
+        .hero-destino {
+            background: url('imagenes/cuzco2.jpg') center/cover no-repeat;
+            min-height: 400px; /* Altura mínima ajustable */
+        }
+    </style>
 </head>
 <body>
     <%@ include file="includes/navbar.jsp" %>
-
+    
     <header class="hero-destino text-white text-center py-5">
         <div class="container">
             <h1 class="display-4 fw-bold">Descubre Cusco</h1>
             <p class="lead">Una experiencia inolvidable en el corazón del Imperio Inca</p>
         </div>
     </header>
-
     <section class="container my-5">
         <div class="destino-info bg-light p-4 rounded shadow-sm mb-5">
-            <img src="../imagenes_java/tour.jpg" alt="Ciudad de Cusco" class="img-fluid rounded mb-4">
             <h2 class="text-primary">La ciudad mágica</h2>
             <p class="fs-5">
                 Cusco, la antigua capital del Imperio Inca, es un destino turístico de primer nivel. 
@@ -42,33 +40,37 @@
 
         <h2 class="text-center mb-4">Principales Atractivos</h2>
         <div class="destinos-contenedor">
+            <!-- Tarjeta 1 -->
             <div class="tarjeta">
-                <img src="../imagenes_java/machu-picchu.jpg" alt="Machu Picchu">
-                <div>
+                <img src="imagenes/Machu_Picchu_maravilla_del_mundo.jpg" alt="Machu Picchu" class="tarjeta-imagen">
+                <div class="tarjeta-cuerpo">
                     <h3>Machu Picchu</h3>
                     <p>Una de las maravillas del mundo moderno. Imperdible si visitas Cusco.</p>
                 </div>
             </div>
 
+            <!-- Tarjeta 2 -->
             <div class="tarjeta">
-                <img src="../imagenes_java/sacsayhuaman.jpg" alt="Sacsayhuamán">
-                <div>
+                <img src="imagenes/Sacsayhuamán.JPG" alt="Sacsayhuamán" class="tarjeta-imagen">
+                <div class="tarjeta-cuerpo">
                     <h3>Sacsayhuamán</h3>
                     <p>Fortaleza inca ubicada al norte de Cusco con vistas panorámicas increíbles.</p>
                 </div>
             </div>
 
+            <!-- Tarjeta 3 -->
             <div class="tarjeta">
-                <img src="../imagenes_java/valle-sagrado.jpg" alt="Valle Sagrado">
-                <div>
+                <img src="imagenes/valle_sagrado.jpg" alt="Valle Sagrado" class="tarjeta-imagen">
+                <div class="tarjeta-cuerpo">
                     <h3>Valle Sagrado</h3>
                     <p>Rodeado de naturaleza, pueblos tradicionales y sitios arqueológicos incas.</p>
                 </div>
             </div>
 
+            <!-- Tarjeta 4 -->
             <div class="tarjeta">
-                <img src="../imagenes_java/montana-7-colores.jpg" alt="Montaña 7 Colores">
-                <div>
+                <img src="imagenes/montaña7colores.jpg" alt="Montaña 7 Colores" class="tarjeta-imagen">
+                <div class="tarjeta-cuerpo">
                     <h3>Montaña de 7 Colores</h3>
                     <p>Una formación geológica natural única por su variedad de colores minerales.</p>
                 </div>
@@ -76,8 +78,8 @@
         </div>
     </section>
 
-    <!-- Botón mágico flotante -->
-    <a href="index.jsp" class="btn-magic-home" title="Volver al inicio">
+    <!-- Botón flotante -->
+    <a href="index.jsp" class="btn-flotante btn-primario" title="Volver al inicio">
         <i class="bi bi-house"></i>
     </a>
 
