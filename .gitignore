@@ -1,0 +1,64 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.log
+*.javadoc
+*.ctxt
+*.class
+*.swp
+*~
+.DS_Store
+
+# Compiled source #
+bin/
+build/
+out/
+target/
+release/
+*.iml
+
+# Maven
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Eclipse
+.project
+.classpath
+.cproject
+.settings/
+.loadpath
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+*.iml
+out/
+
+# VS Code
+.vscode/
+.history/
+.settings/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Others
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
