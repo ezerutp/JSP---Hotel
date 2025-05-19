@@ -5,16 +5,16 @@ public class Cliente {
     private String nombre;
     private String dni;
     private String telefono;
-    private String correo;
+    private String email;
     
     public Cliente(){}
 
-    public Cliente(int id, String nombre, String dni, String telefono, String correo) {
+    public Cliente(int id, String nombre, String dni, String telefono, String email) {
         this.id = id;
         this.nombre = nombre;
         this.dni = dni;
         this.telefono = telefono;
-        this.correo = correo;
+        this.email = email;
     }
 
     public int getId() {
@@ -49,12 +49,12 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public String getCorreo() {
-        return this.correo;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
