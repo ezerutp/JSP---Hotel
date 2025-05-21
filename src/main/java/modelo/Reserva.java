@@ -8,6 +8,59 @@ package modelo;
  *
  * @author josue
  */
-public class Reserva {
-    
+public class reserva {
+   
+   
+private String nombreHuesped, habitacion, checkin, checkout;
+private int personas;
+public reserva(String nombreHuesped, String habitacion, String checkin, String checkout, int personas) {
+        this.nombreHuesped = nombreHuesped;
+        this.habitacion = habitacion;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.personas = personas;
 }
+
+
+    public String getNombreHuesped() {
+        return nombreHuesped;
+    }
+
+    public void setNombreHuesped(String nombreHuesped) {
+        this.nombreHuesped = nombreHuesped;
+    }
+
+    public String getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(String habitacion) {
+        this.habitacion = habitacion;
+    }
+
+    public String getCheckin() {
+        return checkin;
+    }
+
+    public void setCheckin(String checkin) {
+        this.checkin = checkin;
+    }
+
+    public String getCheckout() {
+        return checkout;
+    }
+
+    public void setCheckout(String checkout) {
+        this.checkout = checkout;
+    }
+
+    public int getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(int personas) {
+        this.personas = personas;
+    }
+}
+
+  

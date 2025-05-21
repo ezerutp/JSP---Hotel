@@ -1,8 +1,3 @@
-<%-- 
-    Document   : navbar
-    Created on : 18 abr 2025, 23:43:56
-    Author     : josue
---%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
@@ -14,7 +9,7 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="servicios.jsp">Servicios</a></li>
         <li class="nav-item"><a class="nav-link" href="destino.jsp">Destino</a></li>
-        <li class="nav-item"><a class="nav-link" href="reservas.jsp">Reservas</a></li>
+        <li class="nav-item"><a class="nav-link" href="registrarReserva.jsp">Reservas</a></li>
         <li class="nav-item"><a class="nav-link" href="contacto.jsp">Contacto</a></li>
       </ul>
     </div>

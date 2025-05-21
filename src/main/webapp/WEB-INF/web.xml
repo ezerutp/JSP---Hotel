@@ -8,4 +8,15 @@
             30
         </session-timeout>
     </session-config>
+    
+     <servlet>
+        <servlet-name>ReservaServlet</servlet-name>
+        <servlet-class>com.utp.proceso1.controlador.ReservaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReservaServlet</servlet-name>
+        <url-pattern>/ReservaServlet</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

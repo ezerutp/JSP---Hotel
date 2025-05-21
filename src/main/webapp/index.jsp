@@ -26,7 +26,7 @@
     <div class="container text-center position-relative z-index-1">
         <h1 class="display-3 fw-bold mb-4">Hotel Cusco Mágico</h1>
         <p class="lead fs-3 mb-5">Descubre la belleza de Cusco mientras disfrutas de una experiencia de hospedaje inolvidable</p>
-        <a href="reservas.jsp" class="btn btn-primario btn-lg">
+        <a href="registrarReserva.jsp" class="btn btn-primario btn-lg">
             <i class="bi bi-calendar-check me-2"></i> Reservar Ahora
         </a>
     </div>
