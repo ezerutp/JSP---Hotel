@@ -19,4 +19,13 @@
         <url-pattern>/ReservaServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+    <servlet-name>ContactoServlet</servlet-name>
+    <servlet-class>com.utp.proceso1.controlador.ContactoServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ContactoServlet</servlet-name>
+    <url-pattern>/ContactoServlet</url-pattern>
+</servlet-mapping>
 </web-app>

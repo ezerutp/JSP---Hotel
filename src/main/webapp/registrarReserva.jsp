@@ -7,47 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
-    <style>
-        body {
-            background: url('https://upload.wikimedia.org/wikipedia/commons/e/eb/Machu_Picchu%2C_Peru.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .form-container {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            max-width: 600px;
-            margin: auto;
-            margin-top: 60px;
-        }
-
-        h2 {
-            text-align: center;
-            color: darkorchid;
-            margin-bottom: 10px;
-        }
-        
-        .btn-return {
-            background-color: #6c757d;
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        .btn-return:hover {
-            background-color: #5a6268;
-            color: white;
-        }
-        
-        .button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/carpetas_adicionales/RegistrarReserva.css"/>
 </head>
 <body>
 
