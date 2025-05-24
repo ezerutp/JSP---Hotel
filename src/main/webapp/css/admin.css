@@ -65,3 +65,14 @@
         margin-top: 2rem;
     }
 }
+
+.grafico-container {
+  width: 200px;   /* o el tamaño que necesites */
+  height: 100px;
+  position: relative;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

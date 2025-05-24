@@ -8,19 +8,20 @@ package modelo;
  *
  * @author josue
  */
-public class reserva {
-   
-   
-private String nombreHuesped, habitacion, checkin, checkout;
-private int personas;
-public reserva(String nombreHuesped, String habitacion, String checkin, String checkout, int personas) {
+public class Reserva {
+
+    private String nombreHuesped, habitacion, checkin, checkout,correo, telefono;
+    private int personas;
+
+    public Reserva(String nombreHuesped, String habitacion, String checkin, String checkout, int personas, String correo, String telefono) {
         this.nombreHuesped = nombreHuesped;
         this.habitacion = habitacion;
         this.checkin = checkin;
         this.checkout = checkout;
         this.personas = personas;
-}
-
+        this.correo = correo;
+        this.telefono = telefono;
+    }
 
     public String getNombreHuesped() {
         return nombreHuesped;
@@ -61,6 +62,20 @@ public reserva(String nombreHuesped, String habitacion, String checkin, String c
     public void setPersonas(int personas) {
         this.personas = personas;
     }
-}
 
-  
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+}

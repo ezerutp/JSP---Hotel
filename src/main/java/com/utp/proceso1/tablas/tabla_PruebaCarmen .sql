@@ -26,15 +26,13 @@ CREATE TABLE cliente (
 
 CREATE TABLE reserva (
     id_reserva INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
-    id_habitacion INT NOT NULL,
-    fecha_entrada DATE NOT NULL,
-    fecha_salida DATE NOT NULL,
-    estado ENUM('pendiente', 'checkin', 'checkout', 'cancelada') DEFAULT 'pendiente',
-    total_pago DECIMAL(10,2),
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
-    FOREIGN KEY (id_habitacion) REFERENCES habitacion(id_habitacion)
+    nombreHuesped VARCHAR(100) NOT NULL,
+    habitacion VARCHAR(10) NOT NULL,
+    checkin DATE NOT NULL,
+    checkout DATE NOT NULL,
+    personas INT NOT NULL
 );
+
 
 CREATE TABLE pago (
     id_pago INT AUTO_INCREMENT PRIMARY KEY,

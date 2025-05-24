@@ -1,5 +1,6 @@
 package com.utp.proceso1.controlador;
-import modelo.reserva;
+
+import modelo.Reserva;
 import modelo.Conexion;
 
 import java.io.IOException;
@@ -10,28 +11,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class ReservaServlet extends HttpServlet {
-     @Override
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         // Obtener los parámetros del formulario
-        String nombre = request.getParameter("nombreHuesped");
-        String habitacion = request.getParameter("habitacion");
-        String checkin = request.getParameter("checkin");
-        String checkout = request.getParameter("checkout");
-        int personas = Integer.parseInt(request.getParameter("personas"));
+        String correo = request.getParameter("correo_huesped");
+        String telefono = request.getParameter("telefono_huesped");
+        String nombre = request.getParameter("nombre_huesped");
+        String habitacion = request.getParameter("id_habitacion");
+        String checkin = request.getParameter("fecha_checkin");
+        String checkout = request.getParameter("fecha_checkout");
+        int personas = Integer.parseInt(request.getParameter("cantidad_personas"));
 
         // Crear objeto Reserva con los datos del formulario
-        reserva reserva = new reserva(nombre, habitacion, checkin, checkout, personas);
+        Reserva reserva = new Reserva(nombre, habitacion, checkin, checkout, personas, correo, telefono);
 
         Connection conn = null;
         PreparedStatement ps = null;
@@ -42,8 +38,8 @@ public class ReservaServlet extends HttpServlet {
             conn = conexion.getConexion();
 
             // Consulta SQL para insertar la reserva
-            String sql = "INSERT INTO reserva (nombreHuesped, habitacion, checkin, checkout, personas) " +
-                         "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO reservas (nombre_huesped, id_habitacion, fecha_checkin, fecha_checkout, cantidad_personas, correo_huesped, telefono_huesped) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, reserva.getNombreHuesped());
@@ -51,6 +47,8 @@ public class ReservaServlet extends HttpServlet {
             ps.setString(3, reserva.getCheckin());
             ps.setString(4, reserva.getCheckout());
             ps.setInt(5, reserva.getPersonas());
+            ps.setString(6, reserva.getCorreo());
+            ps.setString(7, reserva.getTelefono());
 
             // Ejecutar la inserción
             ps.executeUpdate();
@@ -66,8 +64,12 @@ public class ReservaServlet extends HttpServlet {
         } finally {
             // Cerrar recursos
             try {
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
