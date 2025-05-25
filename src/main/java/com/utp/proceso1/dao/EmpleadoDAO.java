@@ -1,6 +1,7 @@
 package com.utp.proceso1.dao;
 
 import com.utp.proceso1.modelo.Empleado;
+import com.utp.proceso1.servicio.conexionServicio;
 import com.utp.proceso1.utilidades.EnumHotel.tipoRol;
 
 import java.sql.Connection;
@@ -11,9 +12,10 @@ import java.sql.PreparedStatement;
 
 public class EmpleadoDAO {
     private Connection connection;
+    private final String TABLE_NAME = "empleado";
 
-    public EmpleadoDAO(Connection connection) {
-        this.connection = connection;
+    public EmpleadoDAO() {
+        this.connection = conexionServicio.getInstancia().getConexion();
     }
 
     // METODOS CRUD
@@ -24,7 +26,7 @@ public class EmpleadoDAO {
         if (empleadoExistente != null) {
             return false; // El empleado ya existe
         }
-        String sql = "INSERT INTO empleado (usuario, clave, nombre, rol) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (usuario, clave, nombre, rol) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, empleado.getUsuario());
             stmp.setString(2, empleado.getClave());
@@ -40,18 +42,12 @@ public class EmpleadoDAO {
 
     // getEmpleadoById
     public Empleado getEmpleadoById(int id) {
-        String sql = "SELECT * FROM empleado WHERE id_empleado = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             ResultSet rs = stmp.executeQuery();
             if (rs.next()) {
-                Empleado empleado = new Empleado();
-                empleado.setId(rs.getInt("id_empleado"));
-                empleado.setUsuario(rs.getString("usuario"));
-                empleado.setClave(rs.getString("clave"));
-                empleado.setNombre(rs.getString("nombre"));
-                empleado.setRol(getRolByString(rs.getString("rol")));
-                return empleado;
+                return mapEmpleado(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,18 +57,12 @@ public class EmpleadoDAO {
 
     // getEmpleadoByUsuario
     public Empleado getEmpleadoByUsuario(String usuario) {
-        String sql = "SELECT * FROM empleado WHERE usuario = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, usuario);
             ResultSet rs = stmp.executeQuery();
             if (rs.next()) {
-                Empleado empleado = new Empleado();
-                empleado.setId(rs.getInt("id_empleado"));
-                empleado.setUsuario(rs.getString("usuario"));
-                empleado.setClave(rs.getString("clave"));
-                empleado.setNombre(rs.getString("nombre"));
-                empleado.setRol(getRolByString(rs.getString("rol")));
-                return empleado;
+                return mapEmpleado(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,17 +73,11 @@ public class EmpleadoDAO {
     // getEmpleados
     public List<Empleado> getEmpleados() {
         List<Empleado> empleados = new ArrayList<>();
-        String sql = "SELECT * FROM empleado";
+        String sql = "SELECT * FROM " + TABLE_NAME;
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             ResultSet rs = stmp.executeQuery();
             while (rs.next()) {
-                Empleado empleado = new Empleado();
-                empleado.setId(rs.getInt("id_empleado"));
-                empleado.setUsuario(rs.getString("usuario"));
-                empleado.setClave(rs.getString("clave"));
-                empleado.setNombre(rs.getString("nombre"));
-                empleado.setRol(getRolByString(rs.getString("rol")));
-                empleados.add(empleado);
+                empleados.add(mapEmpleado(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +87,7 @@ public class EmpleadoDAO {
 
     // updateEmpleado
     public boolean updateEmpleado(Empleado empleado) {
-        String sql = "UPDATE empleado SET usuario = ?, clave = ?, nombre = ?, rol = ? WHERE id_empleado = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET usuario = ?, clave = ?, nombre = ?, rol = ? WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, empleado.getUsuario());
             stmp.setString(2, empleado.getClave());
@@ -120,7 +104,7 @@ public class EmpleadoDAO {
 
     // deleteEmpleado
     public boolean deleteEmpleado(int id) {
-        String sql = "DELETE FROM empleado WHERE id_empleado = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             stmp.executeUpdate();
@@ -129,6 +113,16 @@ public class EmpleadoDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private Empleado mapEmpleado(ResultSet rs) throws Exception {
+        Empleado empleado = new Empleado();
+        empleado.setId(rs.getInt("id"));
+        empleado.setUsuario(rs.getString("usuario"));
+        empleado.setClave(rs.getString("clave"));
+        empleado.setNombre(rs.getString("nombre"));
+        empleado.setRol(getRolByString(rs.getString("rol")));
+        return empleado;
     }
 
     // METODOS PRIVADOS

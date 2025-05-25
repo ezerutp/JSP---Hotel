@@ -2,7 +2,6 @@ package com.utp.proceso1.controlador;
 
 import com.utp.proceso1.dao.ClienteDAO;
 import com.utp.proceso1.modelo.Cliente;
-import com.utp.proceso1.servicio.conexionServicio;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ public class TestClienteServelet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        clienteDAO = new ClienteDAO(conexionServicio.getInstancia().getConexion());
+        clienteDAO = new ClienteDAO();
     }
 
     @Override

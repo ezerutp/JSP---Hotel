@@ -1,6 +1,8 @@
 package com.utp.proceso1.dao;
 
 import com.utp.proceso1.modelo.Cliente;
+import com.utp.proceso1.servicio.conexionServicio;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,9 +11,10 @@ import java.sql.PreparedStatement;
 
 public class ClienteDAO {
     private Connection connection;
+    private final String TABLE_NAME = "cliente";
 
-    public ClienteDAO(Connection connection) {
-        this.connection = connection;
+    public ClienteDAO() {
+        this.connection = conexionServicio.getInstancia().getConexion();
     }
 
     // METODOS CRUD
@@ -22,7 +25,7 @@ public class ClienteDAO {
         if (clienteExistente != null) {
             return false; // El cliente ya existe
         }
-        String sql = "INSERT INTO cliente (nombre, dni, telefono, email) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (nombre, dni, telefono, email) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, cliente.getNombre());
             stmp.setString(2, cliente.getDni());
@@ -38,18 +41,12 @@ public class ClienteDAO {
 
     // getclienteById
     public Cliente getClienteById(int id) {
-        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             ResultSet rs = stmp.executeQuery();
             if (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setId(rs.getInt("id_cliente"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setDni(rs.getString("dni"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setEmail(rs.getString("email"));
-                return cliente;
+                return mapCliente(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,18 +56,12 @@ public class ClienteDAO {
 
     // getclienteByDni
     public Cliente getClienteByDni(String dni) {
-        String sql = "SELECT * FROM cliente WHERE dni = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE dni = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, dni);
             ResultSet rs = stmp.executeQuery();
             if (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setId(rs.getInt("id_cliente"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setDni(rs.getString("dni"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setEmail(rs.getString("email"));
-                return cliente;
+                return mapCliente(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,17 +72,11 @@ public class ClienteDAO {
     // getClientes
     public List<Cliente> getClientes() {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM " + TABLE_NAME;
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             ResultSet rs = stmp.executeQuery();
             while (rs.next()) {
-                Cliente cliente = new Cliente();
-                cliente.setId(rs.getInt("id_cliente"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setDni(rs.getString("dni"));
-                cliente.setTelefono(rs.getString("telefono"));
-                cliente.setEmail(rs.getString("email"));
-                clientes.add(cliente);
+                clientes.add(mapCliente(rs));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +86,7 @@ public class ClienteDAO {
 
     // updateCliente
     public boolean updateCliente(Cliente cliente) {
-        String sql = "UPDATE cliente SET nombre = ?, dni = ?, telefono = ?, email = ? WHERE id_cliente = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET nombre = ?, dni = ?, telefono = ?, email = ? WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, cliente.getNombre());
             stmp.setString(2, cliente.getDni());
@@ -118,7 +103,7 @@ public class ClienteDAO {
 
     // deleteCliente
     public boolean deleteCliente(int id) {
-        String sql = "DELETE FROM cliente WHERE id_cliente = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             stmp.executeUpdate();
@@ -127,5 +112,15 @@ public class ClienteDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private Cliente mapCliente(ResultSet rs) throws Exception{
+        Cliente cliente = new Cliente();
+        cliente.setId(rs.getInt("id"));
+        cliente.setNombre(rs.getString("nombre"));
+        cliente.setDni(rs.getString("dni"));
+        cliente.setTelefono(rs.getString("telefono"));
+        cliente.setEmail(rs.getString("email"));
+        return cliente;
     }
 }
