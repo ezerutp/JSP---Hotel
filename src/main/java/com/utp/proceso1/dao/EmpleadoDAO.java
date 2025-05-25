@@ -125,6 +125,21 @@ public class EmpleadoDAO {
         return empleado;
     }
 
+    public Empleado validarLogin(String usuario, String clave) { 
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ? AND clave = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, usuario);
+            stmp.setString(2, clave);
+            ResultSet rs = stmp.executeQuery();
+            if (rs.next()) {
+                return mapEmpleado(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // METODOS PRIVADOS
     private tipoRol getRolByString(String rol) {
         switch (rol.toUpperCase()) {
