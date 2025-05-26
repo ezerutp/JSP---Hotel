@@ -1,75 +1,138 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Registrar Reserva</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="css/carpetas_adicionales/RegistrarReserva.css"/>
-    </head>
-    <body>
-
-        <div class="container">
-            <div class="form-container">
-                <h2>RESERVA CON NOSOTROS</h2>
-                <form action="ReservaServlet" method="post">
-
-                    <div class="mb-3">
-                        <label class="form-label">Nombre del Huésped</label>
-                        <input type="text" name="nombre_huesped" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Correo del Huésped</label>
-                        <input type="email" name="correo_huesped" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Teléfono del Huésped</label>
-                        <input type="text" name="telefono_huesped" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Nombre de Habitación</label>
-                        <select name="id_habitacion" class="form-select" required>
-                            <option value="">-- Selecciona una habitación --</option>
-                            <option value="101">101 - Simple</option>
-                            <option value="102">102 - Doble</option>
-                            <option value="201">201 - Suite</option>
-                            <option value="202">202 - Matrimonial</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Fecha de Check-in</label>
-                        <input type="date" name="fecha_checkin" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Fecha de Check-out</label>
-                        <input type="date" name="fecha_checkout" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Cantidad de Personas</label>
-                        <input type="number" name="cantidad_personas" class="form-control" min="1" max="10" required>
-                    </div>
-
-                    <div class="button-group">
-                        <a href="index.jsp" class="btn btn-return btn-lg">
-                            <i class="bi bi-arrow-left-circle"></i> Regresar al Inicio
-                        </a>
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="bi bi-save"></i> Grabar Reserva
-                        </button>
-                    </div>
-                </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Reserva - Hotel Cusco</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/carpetas_adicionales/RegistrarReserva.css"/>
+    <style>
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <c:if test="${not empty param.error}">
+            <div class="alert alert-danger alert-dismissible fade show">
+                ${param.error}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </c:if>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-container">
+                    <h2 class="text-center mb-4">
+                        <i class="bi bi-calendar-plus"></i> Reserva con Nosotros
+                    </h2>
+                    
+                    <form id="reservaForm" action="ReservaServlet" method="post" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre_huesped" class="form-label">Nombre del Huésped</label>
+                                <input type="text" class="form-control" id="nombre_huesped" 
+                                       name="nombre_huesped" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="correo_huesped" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="correo_huesped" 
+                                       name="correo_huesped" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="telefono_huesped" class="form-label">Teléfono/Celular</label>
+                                <input type="tel" class="form-control" id="telefono_huesped" 
+                                       name="telefono_huesped" pattern="[0-9]{9}" 
+                                       title="Ingrese un número de 9 dígitos" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="id_habitacion" class="form-label">Habitación</label>
+                                <select class="form-select" id="id_habitacion" name="id_habitacion" required>
+                                    <option value="" selected disabled>Seleccione una habitación</option>
+                                    <option value="101">101 - Simple (S/120)</option>
+                                    <option value="102">102 - Doble (S/180)</option>
+                                    <option value="201">201 - Suite (S/300)</option>
+                                    <option value="202">202 - Familiar (S/250)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="fecha_checkin" class="form-label">Fecha de Llegada</label>
+                                <input type="date" class="form-control" id="fecha_checkin" 
+                                       name="fecha_checkin" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="fecha_checkout" class="form-label">Fecha de Salida</label>
+                                <input type="date" class="form-control" id="fecha_checkout" 
+                                       name="fecha_checkout" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="cantidad_personas" class="form-label">N° de Personas</label>
+                                <input type="number" class="form-control" id="cantidad_personas" 
+                                       name="cantidad_personas" min="1" max="6" required>
+                            </div>
+                            
+                            <div class="col-12 mt-4">
+                                <div class="d-flex justify-content-between">
+                                    <a href="index.jsp" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left"></i> Cancelar
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-save"></i> Confirmar Reserva
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Validación de fechas
+        document.getElementById('reservaForm').addEventListener('submit', function(e) {
+            const checkin = new Date(document.getElementById('fecha_checkin').value);
+            const checkout = new Date(document.getElementById('fecha_checkout').value);
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            
+            if (checkin < hoy) {
+                alert('La fecha de llegada no puede ser anterior a hoy');
+                e.preventDefault();
+            }
+            
+            if (checkout <= checkin) {
+                alert('La fecha de salida debe ser posterior a la de llegada');
+                e.preventDefault();
+            }
+        });
+        
+        // Actualizar mínimo de fecha de salida
+        document.getElementById('fecha_checkin').addEventListener('change', function() {
+            const checkin = this.value;
+            document.getElementById('fecha_checkout').min = checkin;
+        });
+    </script>
+</body>
 </html>

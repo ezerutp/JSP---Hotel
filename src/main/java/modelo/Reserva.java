@@ -4,10 +4,6 @@
  */
 package modelo;
 
-/**
- *
- * @author josue
- */
 public class Reserva {
 
     private String nombreHuesped, habitacion, checkin, checkout,correo, telefono;

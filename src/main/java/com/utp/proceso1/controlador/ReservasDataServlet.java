@@ -6,22 +6,22 @@ package com.utp.proceso1.controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import modelo.Conexion;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 @WebServlet("/ReservasDataServlet")
-public class ReservasDataServlet extends HttpServlet {
+public class ReservasDataServlet extends HttpServlet implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         
@@ -30,7 +30,7 @@ public class ReservasDataServlet extends HttpServlet {
 
         try (Connection conn = new Conexion().getConexion()) {
 
-            String sql = "SELECT id_reserva, nombre_huesped, id_habitacion, fecha_checkin, fecha_checkout, cantidad_personas FROM reservas";
+            String sql = "SELECT id_reserva, nombre_huesped, id_habitacion, fecha_checkin, fecha_checkout, cantidad_personas FROM reserva";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
