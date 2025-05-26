@@ -4,14 +4,16 @@ public class TipoHabitacion {
     private int id;
     private String nombre;
     private String descripcion;
+    private double precio_noche;
     private int capacidad;
 
     public TipoHabitacion() {}
 
-    public TipoHabitacion(int id, String nombre, String descripcion, int capacidad) {
+    public TipoHabitacion(int id, String nombre, String descripcion, double precio_noche, int capacidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.precio_noche = precio_noche;
         this.capacidad = capacidad;
     }
 
@@ -37,6 +39,14 @@ public class TipoHabitacion {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public double getPrecioNoche() {
+        return this.precio_noche;
+    }
+
+    public void setPrecioNoche(double precioNoche) {
+        this.precio_noche = precioNoche;
     }
 
     public int getCapacidad() {

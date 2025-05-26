@@ -4,16 +4,19 @@ public class EnumHotel {
     
     public static enum estadoHabitacion {
         DISPONIBLE,
-        RESERVADA,
-        OCUPADA,
-        MANTENIMIENTO
+        OCUPADA
     }
 
     public static enum estadoReserva {
         PENDIENTE,
-        CHECKIN,
-        CHECKOUT,
-        CANCELADA
+        CONFIRMADA,
+        CANCELADA,
+        COMPLETADA
+    }
+
+    public static enum estadoMensaje {
+        NUEVO,
+        LEIDO
     }
 
     public static enum metodoPago {

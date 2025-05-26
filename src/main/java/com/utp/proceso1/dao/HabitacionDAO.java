@@ -13,7 +13,7 @@ import java.util.List;
 
 public class HabitacionDAO {
     private Connection connection;
-    private final String TABLE_NAME = "habitacion";
+    private final String TABLE_NAME = "habitaciones";
 
     public HabitacionDAO() {
         this.connection = conexionServicio.getInstancia().getConexion();
@@ -21,12 +21,11 @@ public class HabitacionDAO {
 
     // CREATE
     public boolean create(Habitacion habitacion) {
-        String sql = "INSERT INTO " + TABLE_NAME + " (numero, tipo_habitacion, precio, estado) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (numero_habitacion, id_tipo, estado) VALUES (?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
-            stmp.setString(1, habitacion.getNumero());
+            stmp.setString(1, habitacion.getNumeroHabitacion());
             stmp.setInt(2, habitacion.getTipoHabitacion().getId());
-            stmp.setDouble(3, habitacion.getPrecio());
-            stmp.setString(4, habitacion.getEstado().toString());
+            stmp.setString(3, habitacion.getEstado().name());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class HabitacionDAO {
 
     // READ by ID
     public Habitacion getHabitacionById(int id) {
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id_habitacion = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             ResultSet rs = stmp.executeQuery();
@@ -67,13 +66,12 @@ public class HabitacionDAO {
 
     // UPDATE
     public boolean updateHabitacion(Habitacion habitacion) {
-        String sql = "UPDATE " + TABLE_NAME + " SET numero = ?, tipo_habitacion = ?, precio = ?, estado = ? WHERE id = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET numero_habitacion = ?, id_tipo = ?, estado = ? WHERE id_habitacion = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
-            stmp.setString(1, habitacion.getNumero());
-            stmp.setString(2, habitacion.getTipoHabitacion().toString());
-            stmp.setDouble(3, habitacion.getPrecio());
-            stmp.setString(4, habitacion.getEstado().toString());
-            stmp.setInt(5, habitacion.getId());
+            stmp.setString(1, habitacion.getNumeroHabitacion());
+            stmp.setInt(2, habitacion.getTipoHabitacion().getId());
+            stmp.setString(3, habitacion.getEstado().name());
+            stmp.setInt(4, habitacion.getId());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -84,7 +82,7 @@ public class HabitacionDAO {
 
     // DELETE
     public boolean deleteHabitacion(int id) {
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id_habitacion = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             stmp.executeUpdate();
@@ -98,20 +96,16 @@ public class HabitacionDAO {
     // MAPEO
     private Habitacion mapHabitacion(ResultSet rs) throws Exception {
         Habitacion habitacion = new Habitacion();
-        habitacion.setId(rs.getInt("id"));
-        habitacion.setNumero(rs.getString("numero"));
-        TipoHabitacion tipoHabitacion = new TipoHabitacionDao().getTipoHabitacionById(rs.getInt("tipo_habitacion"));
-        habitacion.setTipoHabitacion(tipoHabitacion);
-        habitacion.setPrecio(rs.getDouble("precio"));
-        habitacion.setEstado(getEstadoByString(rs.getString("estado")));
-        return habitacion;
-    }
+        habitacion.setId(rs.getInt("id_habitacion"));
+        habitacion.setNumeroHabitacion(rs.getString("numero_habitacion"));
 
-    private estadoHabitacion getEstadoByString(String estado) {
-        try {
-            return estadoHabitacion.valueOf(estado.toUpperCase());
-        } catch (Exception e) {
-            return null;
-        }
+        // Obtener el tipo de habitación usando el DAO correspondiente
+        int tipoHabitacionId = rs.getInt("id_tipo");
+        TipoHabitacionDao tipoHabitacionDao = new TipoHabitacionDao();
+        TipoHabitacion tipoHabitacion = tipoHabitacionDao.getTipoHabitacionById(tipoHabitacionId);
+        habitacion.setTipoHabitacion(tipoHabitacion);
+
+        habitacion.setEstado(estadoHabitacion.valueOf(rs.getString("estado").toUpperCase()));
+        return habitacion;
     }
 }

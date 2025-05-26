@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TipoHabitacionDao {
     private Connection connection;
-    private final String TABLE_NAME = "tipo_habitacion";
+    private final String TABLE_NAME = "tipos_habitacion";
 
     public TipoHabitacionDao() {
         this.connection = conexionServicio.getInstancia().getConexion();
@@ -19,11 +19,12 @@ public class TipoHabitacionDao {
 
     // CREATE
     public boolean create(TipoHabitacion tipoHabitacion) {
-        String sql = "INSERT INTO " + TABLE_NAME + " (nombre, descripcion, capacidad) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (nombre, descripcion, precio_noche, capacidad) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, tipoHabitacion.getNombre());
             stmp.setString(2, tipoHabitacion.getDescripcion());
-            stmp.setInt(3, tipoHabitacion.getCapacidad());
+            stmp.setDouble(3, tipoHabitacion.getPrecioNoche());
+            stmp.setInt(4, tipoHabitacion.getCapacidad());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -34,7 +35,7 @@ public class TipoHabitacionDao {
 
     // READ by ID
     public TipoHabitacion getTipoHabitacionById(int id) {
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id_tipo = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             ResultSet rs = stmp.executeQuery();
@@ -64,12 +65,13 @@ public class TipoHabitacionDao {
 
     // UPDATE
     public boolean updateTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        String sql = "UPDATE " + TABLE_NAME + " SET nombre = ?, descripcion = ?, capacidad = ? WHERE id = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET nombre = ?, descripcion = ?, precio_noche = ?, capacidad = ? WHERE id_tipo = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, tipoHabitacion.getNombre());
             stmp.setString(2, tipoHabitacion.getDescripcion());
-            stmp.setInt(3, tipoHabitacion.getCapacidad());
-            stmp.setInt(4, tipoHabitacion.getId());
+            stmp.setDouble(3, tipoHabitacion.getPrecioNoche());
+            stmp.setInt(4, tipoHabitacion.getCapacidad());
+            stmp.setInt(5, tipoHabitacion.getId());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -80,7 +82,7 @@ public class TipoHabitacionDao {
 
     // DELETE
     public boolean deleteTipoHabitacion(int id) {
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id_tipo = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             stmp.executeUpdate();
@@ -94,9 +96,10 @@ public class TipoHabitacionDao {
     // MAPEO
     private TipoHabitacion mapTipoHabitacion(ResultSet rs) throws Exception {
         TipoHabitacion tipo = new TipoHabitacion();
-        tipo.setId(rs.getInt("id"));
+        tipo.setId(rs.getInt("id_tipo"));
         tipo.setNombre(rs.getString("nombre"));
         tipo.setDescripcion(rs.getString("descripcion"));
+        tipo.setPrecioNoche(rs.getDouble("precio_noche"));
         tipo.setCapacidad(rs.getInt("capacidad"));
         return tipo;
     }

@@ -1,15 +1,13 @@
 package com.utp.proceso1.dao;
 
 import com.utp.proceso1.modelo.Reserva;
-import com.utp.proceso1.servicio.conexionServicio;
-import com.utp.proceso1.modelo.Cliente;
 import com.utp.proceso1.modelo.Habitacion;
+import com.utp.proceso1.servicio.conexionServicio;
 import com.utp.proceso1.utilidades.EnumHotel.estadoReserva;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +21,20 @@ public class ReservaDAO {
 
     // CREATE
     public boolean create(Reserva reserva) {
-        String sql = "INSERT INTO " + TABLE_NAME + " (id_cliente, id_habitacion, fecha_entrada, fecha_salida, estado, total_pago) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (id_habitacion, nombre_huesped, correo_huesped, telefono_huesped, fecha_checkin, fecha_checkout, cantidad_personas, precio_noche, total_pagar, estado_reserva, fecha_reserva, notas) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
-            stmp.setInt(1, reserva.getCliente().getId());
-            stmp.setInt(2, reserva.getHabitacion().getId());
-            stmp.setDate(3, new Date(reserva.getFecha_entrada().getTime()));
-            stmp.setDate(4, new Date(reserva.getFecha_salida().getTime()));
-            stmp.setString(5, reserva.getEstado().toString());
-            stmp.setDouble(6, reserva.getTotal_pago());
+            stmp.setInt(1, reserva.getIdHabitacion().getId());
+            stmp.setString(2, reserva.getNombreHuesped());
+            stmp.setString(3, reserva.getCorreoHuesped());
+            stmp.setString(4, reserva.getTelefonoHuesped());
+            stmp.setDate(5, new java.sql.Date(reserva.getFechaCheckin().getTime()));
+            stmp.setDate(6, new java.sql.Date(reserva.getFechaCheckout().getTime()));
+            stmp.setInt(7, reserva.getCantidadPersonas());
+            stmp.setDouble(8, reserva.getPrecioNoche());
+            stmp.setDouble(9, reserva.getTotalPagar());
+            stmp.setString(10, reserva.getEstadoReserva().name());
+            stmp.setDate(11, new java.sql.Date(reserva.getFechaReserva().getTime()));
+            stmp.setString(12, reserva.getNotas());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -41,7 +45,7 @@ public class ReservaDAO {
 
     // READ by ID
     public Reserva getReservaById(int id) {
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id_reserva = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             ResultSet rs = stmp.executeQuery();
@@ -71,15 +75,21 @@ public class ReservaDAO {
 
     // UPDATE
     public boolean updateReserva(Reserva reserva) {
-        String sql = "UPDATE " + TABLE_NAME + " SET id_cliente = ?, id_habitacion = ?, fecha_entrada = ?, fecha_salida = ?, estado = ?, total_pago = ? WHERE id = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET id_habitacion = ?, nombre_huesped = ?, correo_huesped = ?, telefono_huesped = ?, fecha_checkin = ?, fecha_checkout = ?, cantidad_personas = ?, precio_noche = ?, total_pagar = ?, estado_reserva = ?, fecha_reserva = ?, notas = ? WHERE id_reserva = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
-            stmp.setInt(1, reserva.getCliente().getId());
-            stmp.setInt(2, reserva.getHabitacion().getId());
-            stmp.setDate(3, new Date(reserva.getFecha_entrada().getTime()));
-            stmp.setDate(4, new Date(reserva.getFecha_salida().getTime()));
-            stmp.setString(5, reserva.getEstado().toString());
-            stmp.setDouble(6, reserva.getTotal_pago());
-            stmp.setInt(7, reserva.getId());
+            stmp.setInt(1, reserva.getIdHabitacion().getId());
+            stmp.setString(2, reserva.getNombreHuesped());
+            stmp.setString(3, reserva.getCorreoHuesped());
+            stmp.setString(4, reserva.getTelefonoHuesped());
+            stmp.setDate(5, new java.sql.Date(reserva.getFechaCheckin().getTime()));
+            stmp.setDate(6, new java.sql.Date(reserva.getFechaCheckout().getTime()));
+            stmp.setInt(7, reserva.getCantidadPersonas());
+            stmp.setDouble(8, reserva.getPrecioNoche());
+            stmp.setDouble(9, reserva.getTotalPagar());
+            stmp.setString(10, reserva.getEstadoReserva().name());
+            stmp.setDate(11, new java.sql.Date(reserva.getFechaReserva().getTime()));
+            stmp.setString(12, reserva.getNotas());
+            stmp.setInt(13, reserva.getIdReserva());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -90,7 +100,7 @@ public class ReservaDAO {
 
     // DELETE
     public boolean deleteReserva(int id) {
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id = ?";
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE id_reserva = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
             stmp.executeUpdate();
@@ -104,23 +114,25 @@ public class ReservaDAO {
     // MAPEO
     private Reserva mapReserva(ResultSet rs) throws Exception {
         Reserva reserva = new Reserva();
-        reserva.setId(rs.getInt("id"));
-        Cliente cliente = new ClienteDAO().getClienteById(rs.getInt("id_cliente"));
-        Habitacion habitacion = new HabitacionDAO().getHabitacionById(rs.getInt("id_habitacion"));
-        reserva.setCliente(cliente);
-        reserva.setHabitacion(habitacion);
-        reserva.setFecha_entrada(rs.getDate("fecha_entrada"));
-        reserva.setFecha_salida(rs.getDate("fecha_salida"));
-        reserva.setEstado(getEstadoReservaByString(rs.getString("estado")));
-        reserva.setTotal_pago(rs.getDouble("total_pago"));
-        return reserva;
-    }
+        reserva.setIdReserva(rs.getInt("id_reserva"));
+        
+        // Obtener la habitación usando el DAO correspondiente
+        int idHabitacion = rs.getInt("id_habitacion");
+        HabitacionDAO habitacionDAO = new HabitacionDAO();
+        Habitacion habitacion = habitacionDAO.getHabitacionById(idHabitacion);
+        reserva.setIdHabitacion(habitacion);
 
-    private estadoReserva getEstadoReservaByString(String estado) {
-        try {
-            return estadoReserva.valueOf(estado.toUpperCase());
-        } catch (Exception e) {
-            return null;
-        }
+        reserva.setNombreHuesped(rs.getString("nombre_huesped"));
+        reserva.setCorreoHuesped(rs.getString("correo_huesped"));
+        reserva.setTelefonoHuesped(rs.getString("telefono_huesped"));
+        reserva.setFechaCheckin(rs.getDate("fecha_checkin"));
+        reserva.setFechaCheckout(rs.getDate("fecha_checkout"));
+        reserva.setCantidadPersonas(rs.getInt("cantidad_personas"));
+        reserva.setPrecioNoche(rs.getDouble("precio_noche"));
+        reserva.setTotalPagar(rs.getDouble("total_pagar"));
+        reserva.setEstadoReserva(estadoReserva.valueOf(rs.getString("estado_reserva").toUpperCase()));
+        reserva.setFechaReserva(rs.getDate("fecha_reserva"));
+        reserva.setNotas(rs.getString("notas"));
+        return reserva;
     }
 }

@@ -1,84 +1,145 @@
 package com.utp.proceso1.modelo;
 
-import java.util.Date;
-
 import com.utp.proceso1.utilidades.EnumHotel.estadoReserva;
 
-public class Reserva {
-    private int id;
-    private Cliente cliente;
-    private Habitacion habitacion;
-    private Date fecha_entrada;
-    private Date fecha_salida;
-    private estadoReserva estado;
-    private double total_pago;
+import java.util.Date;
 
+public class Reserva {
+    private int idReserva;
+    private Habitacion idHabitacion;
+    private String nombreHuesped;
+    private String correoHuesped;
+    private String telefonoHuesped;
+    private Date fechaCheckin;
+    private Date fechaCheckout;
+    private int cantidadPersonas;
+    private double precioNoche;
+    private double totalPagar;
+    private estadoReserva estadoReserva;
+    private Date fechaReserva;
+    private String notas;
+    
     public Reserva() {}
 
-    public Reserva(int id, Cliente cliente, Habitacion habitacion, Date fecha_entrada, Date fecha_salida, estadoReserva estado, double total_pago) {
-        this.id = id;
-        this.cliente = cliente;
-        this.habitacion = habitacion;
-        this.fecha_entrada = fecha_entrada;
-        this.fecha_salida = fecha_salida;
-        this.estado = estado;
-        this.total_pago = total_pago;
+    public Reserva(int idReserva, Habitacion idHabitacion, String nombreHuesped, String correoHuesped, String telefonoHuesped, Date fechaCheckin, Date fechaCheckout, int cantidadPersonas, double precioNoche, double totalPagar, estadoReserva estadoReserva, Date fechaReserva, String notas) {
+        this.idReserva = idReserva;
+        this.idHabitacion = idHabitacion;
+        this.nombreHuesped = nombreHuesped;
+        this.correoHuesped = correoHuesped;
+        this.telefonoHuesped = telefonoHuesped;
+        this.fechaCheckin = fechaCheckin;
+        this.fechaCheckout = fechaCheckout;
+        this.cantidadPersonas = cantidadPersonas;
+        this.precioNoche = precioNoche;
+        this.totalPagar = totalPagar;
+        this.estadoReserva = estadoReserva;
+        this.fechaReserva = fechaReserva;
+        this.notas = notas;
     }
 
-    public int getId() {
-        return this.id;
+    // Getters y Setters
+
+    public int getIdReserva() {
+        return idReserva;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public Cliente getCliente() {
-        return this.cliente;
+    public Habitacion getIdHabitacion() {
+        return idHabitacion;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdHabitacion(Habitacion idHabitacion) {
+        this.idHabitacion = idHabitacion;
     }
 
-    public Habitacion getHabitacion() {
-        return this.habitacion;
+    public String getNombreHuesped() {
+        return nombreHuesped;
     }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
+    public void setNombreHuesped(String nombreHuesped) {
+        this.nombreHuesped = nombreHuesped;
     }
 
-    public Date getFecha_entrada() {
-        return this.fecha_entrada;
+    public String getCorreoHuesped() {
+        return correoHuesped;
     }
 
-    public void setFecha_entrada(Date fecha_entrada) {
-        this.fecha_entrada = fecha_entrada;
+    public void setCorreoHuesped(String correoHuesped) {
+        this.correoHuesped = correoHuesped;
     }
 
-    public Date getFecha_salida() {
-        return this.fecha_salida;
+    public String getTelefonoHuesped() {
+        return telefonoHuesped;
     }
 
-    public void setFecha_salida(Date fecha_salida) {
-        this.fecha_salida = fecha_salida;
+    public void setTelefonoHuesped(String telefonoHuesped) {
+        this.telefonoHuesped = telefonoHuesped;
     }
 
-    public estadoReserva getEstado() {
-        return this.estado;
+    public Date getFechaCheckin() {
+        return fechaCheckin;
     }
 
-    public void setEstado(estadoReserva estado) {
-        this.estado = estado;
+    public void setFechaCheckin(Date fechaCheckin) {
+        this.fechaCheckin = fechaCheckin;
     }
 
-    public double getTotal_pago() {
-        return this.total_pago;
+    public Date getFechaCheckout() {
+        return fechaCheckout;
     }
 
-    public void setTotal_pago(double total_pago) {
-        this.total_pago = total_pago;
+    public void setFechaCheckout(Date fechaCheckout) {
+        this.fechaCheckout = fechaCheckout;
     }
 
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+
+    public double getPrecioNoche() {
+        return precioNoche;
+    }
+
+    public void setPrecioNoche(double precioNoche) {
+        this.precioNoche = precioNoche;
+    }
+
+    public double getTotalPagar() {
+        return totalPagar;
+    }
+
+    public void setTotalPagar(double totalPagar) {
+        this.totalPagar = totalPagar;
+    }
+
+    public estadoReserva getEstadoReserva() {
+        return estadoReserva;
+    }
+
+    public void setEstadoReserva(estadoReserva estadoReserva) {
+        this.estadoReserva = estadoReserva;
+    }
+
+    public Date getFechaReserva() {
+        return fechaReserva;
+    }
+
+    public void setFechaReserva(Date fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
 }

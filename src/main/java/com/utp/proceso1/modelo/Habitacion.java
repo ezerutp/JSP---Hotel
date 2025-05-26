@@ -4,18 +4,16 @@ import com.utp.proceso1.utilidades.EnumHotel.estadoHabitacion;
 
 public class Habitacion {
     private int id;
-    private String numero;
+    private String numeroHabitacion;
     private TipoHabitacion tipoHabitacion;
-    private double precio;
     private estadoHabitacion estado;
 
     public Habitacion() {}
 
-    public Habitacion(int id, String numero, TipoHabitacion tipoHabitacion, double precio, estadoHabitacion estado) {
+    public Habitacion(int id, String numeroHabitacion, TipoHabitacion tipoHabitacion, estadoHabitacion estado) {
         this.id = id;
-        this.numero = numero;
+        this.numeroHabitacion = numeroHabitacion;
         this.tipoHabitacion = tipoHabitacion;
-        this.precio = precio;
         this.estado = estado;
     }
 
@@ -27,12 +25,12 @@ public class Habitacion {
         this.id = id;
     }
 
-    public String getNumero() {
-        return this.numero;
+    public String getNumeroHabitacion() {
+        return this.numeroHabitacion;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setNumeroHabitacion(String numeroHabitacion) {
+        this.numeroHabitacion = numeroHabitacion;
     }
 
     public TipoHabitacion getTipoHabitacion() {
@@ -41,14 +39,6 @@ public class Habitacion {
 
     public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
-    }
-
-    public double getPrecio() {
-        return this.precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public estadoHabitacion getEstado() {
