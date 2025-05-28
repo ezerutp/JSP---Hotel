@@ -66,10 +66,9 @@
                                 <label for="id_habitacion" class="form-label">Habitación</label>
                                 <select class="form-select" id="id_habitacion" name="id_habitacion" required>
                                     <option value="" selected disabled>Seleccione una habitación</option>
-                                    <option value="101">101 - Simple (S/120)</option>
-                                    <option value="102">102 - Doble (S/180)</option>
-                                    <option value="201">201 - Suite (S/300)</option>
-                                    <option value="202">202 - Familiar (S/250)</option>
+                                    <c:forEach var="habitacion" items="${tiposHabitacion}">
+                                        <option value="${habitacion.id}">${habitacion.nombre} -  (S/${habitacion.precioNoche})</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             

@@ -1,6 +1,7 @@
 package com.utp.proceso1.controlador;
 
 import com.utp.proceso1.dao.ReservaDAO;
+import com.utp.proceso1.dao.TipoHabitacionDao;
 import com.utp.proceso1.dao.HabitacionDAO;
 import com.utp.proceso1.modelo.Reserva;
 import com.utp.proceso1.modelo.Habitacion;
@@ -79,6 +80,16 @@ public class ReservaServlet extends HttpServlet {
             response.sendRedirect("registrarReserva.jsp?error=Error+del+sistema");
         }
     }
+
+     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+                TipoHabitacionDao tipoHabitacionDao = new TipoHabitacionDao();
+                request.setAttribute("tiposHabitacion", tipoHabitacionDao.getTipoHabitaciones());
+                request.getRequestDispatcher("registrarReserva.jsp").forward(request, response);
+
+            }
 
     private double calcularTotalPagar(java.sql.Date checkin, java.sql.Date checkout, double precioNoche) {
         try {
