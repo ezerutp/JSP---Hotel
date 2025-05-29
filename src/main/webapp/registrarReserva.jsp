@@ -66,8 +66,8 @@
                                 <label for="id_habitacion" class="form-label">Habitación</label>
                                 <select class="form-select" id="id_habitacion" name="id_habitacion" required>
                                     <option value="" selected disabled>Seleccione una habitación</option>
-                                    <c:forEach var="habitacion" items="${tiposHabitacion}">
-                                        <option value="${habitacion.id}">${habitacion.nombre} -  (S/${habitacion.precioNoche})</option>
+                                    <c:forEach var="habitacion" items="${habitaciones}">
+                                        <option value="${habitacion.id}">${habitacion.numeroHabitacion} -  (S/${habitacion.tipoHabitacion.precioNoche})</option>
                                     </c:forEach>
                                 </select>
                             </div>

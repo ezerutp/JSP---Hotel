@@ -66,7 +66,8 @@ public class HabitacionDAO {
 
     // UPDATE
     public boolean updateHabitacion(Habitacion habitacion) {
-        String sql = "UPDATE " + TABLE_NAME + " SET numero_habitacion = ?, id_tipo = ?, estado = ? WHERE id_habitacion = ?";
+        String sql = "UPDATE " + TABLE_NAME
+                + " SET numero_habitacion = ?, id_tipo = ?, estado = ? WHERE id_habitacion = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, habitacion.getNumeroHabitacion());
             stmp.setInt(2, habitacion.getTipoHabitacion().getId());
@@ -107,5 +108,34 @@ public class HabitacionDAO {
 
         habitacion.setEstado(estadoHabitacion.valueOf(rs.getString("estado").toUpperCase()));
         return habitacion;
+    }
+
+    // funciones adicionales
+    public List<Habitacion> getHabitacionesByEstado(estadoHabitacion estado) {
+        List<Habitacion> habitaciones = new ArrayList<>();
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE estado = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, estado.name().toLowerCase());
+            ResultSet rs = stmp.executeQuery();
+            while (rs.next()) {
+                habitaciones.add(mapHabitacion(rs));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return habitaciones;
+    }
+
+    public boolean updateEstadoHabitacion(int id, estadoHabitacion estado) {
+        String sql = "UPDATE " + TABLE_NAME + " SET estado = ? WHERE id_habitacion = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, estado.name().toLowerCase());
+            stmp.setInt(2, id);
+            stmp.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

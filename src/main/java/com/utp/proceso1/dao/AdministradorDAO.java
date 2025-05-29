@@ -103,4 +103,32 @@ public class AdministradorDAO {
         administrador.setFechaCreacion(rs.getDate("fecha_creacion"));
         return administrador;
     }
+
+    // funciones adicionales
+    public Administrador getAdministradorByUsuario(String usuario) {
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, usuario);
+            ResultSet rs = stmp.executeQuery();
+            if (rs.next()) {
+                return mapAdministrador(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Administrador validarCredenciales(String usuario, String contrasena) {
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ? AND contrasena = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, usuario);
+            stmp.setString(2, contrasena);
+            ResultSet rs = stmp.executeQuery();
+            return rs.next() ? mapAdministrador(rs) : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

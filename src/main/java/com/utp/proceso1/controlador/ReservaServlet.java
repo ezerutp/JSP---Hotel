@@ -1,16 +1,15 @@
 package com.utp.proceso1.controlador;
 
 import com.utp.proceso1.dao.ReservaDAO;
-import com.utp.proceso1.dao.TipoHabitacionDao;
 import com.utp.proceso1.dao.HabitacionDAO;
 import com.utp.proceso1.modelo.Reserva;
 import com.utp.proceso1.modelo.Habitacion;
 import com.utp.proceso1.utilidades.EnumHotel;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
@@ -71,7 +70,12 @@ public class ReservaServlet extends HttpServlet {
             boolean exito = reservaDAO.create(reserva);
 
             if (exito) {
-                response.sendRedirect("reservaExitosa.jsp");
+                boolean actualizado = habitacionDAO.updateEstadoHabitacion(numeroHabitacion, EnumHotel.estadoHabitacion.OCUPADA);
+                if (actualizado) {
+                    response.sendRedirect("reservaExitosa.jsp?success=Reserva+registrada+con+éxito");
+                } else {
+                    response.sendRedirect("registrarReserva.jsp?error=Error+al+actualizar+estado+de+habitacion");
+                }
             } else {
                 response.sendRedirect("registrarReserva.jsp?error=Error+al+registrar+reserva");
             }
@@ -85,10 +89,9 @@ public class ReservaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-                TipoHabitacionDao tipoHabitacionDao = new TipoHabitacionDao();
-                request.setAttribute("tiposHabitacion", tipoHabitacionDao.getTipoHabitaciones());
+                HabitacionDAO habitacionDAO = new HabitacionDAO();
+                request.setAttribute("habitaciones", habitacionDAO.getHabitacionesByEstado(EnumHotel.estadoHabitacion.DISPONIBLE));
                 request.getRequestDispatcher("registrarReserva.jsp").forward(request, response);
-
             }
 
     private double calcularTotalPagar(java.sql.Date checkin, java.sql.Date checkout, double precioNoche) {

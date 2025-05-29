@@ -26,7 +26,7 @@
         </div>
       </div>
       <% } %>
-        <form action="login" method="POST" class="space-y-5">
+        <form action="administrador" method="POST" class="space-y-5">
           <div>
             <label for="usuario" class="block text-sm font-medium text-gray-700">Usuario</label>
             <input type="text" id="usuario" name="usuario" required
