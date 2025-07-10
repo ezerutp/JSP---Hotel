@@ -15,6 +15,15 @@ public class Contacto {
 
     public Contacto() {}
 
+    public Contacto(String nombreCompleto, String correo, int telefono, String mensaje, Date fechaEnvio, estadoMensaje estado) {
+        this.nombreCompleto = nombreCompleto;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.mensaje = mensaje;
+        this.fechaEnvio = fechaEnvio;
+        this.estado = estado;
+    }
+
     public Contacto(int id, String nombreCompleto, String correo, int telefono, String mensaje, Date fechaEnvio, estadoMensaje estado) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;

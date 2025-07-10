@@ -24,7 +24,7 @@ public class AdministradorDAO {
             stmp.setString(1, administrador.getUsuario());
             stmp.setString(2, administrador.getContrasena());
             stmp.setString(3, administrador.getNombreCompleto());
-            stmp.setDate(4, new java.sql.Date(administrador.getFechaCreacion().getTime()));
+            stmp.setTimestamp(4, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class AdministradorDAO {
             stmp.setString(1, administrador.getUsuario());
             stmp.setString(2, administrador.getContrasena());
             stmp.setString(3, administrador.getNombreCompleto());
-            stmp.setDate(4, new java.sql.Date(administrador.getFechaCreacion().getTime()));
+            stmp.setTimestamp(4, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
             stmp.setInt(5, administrador.getId());
             stmp.executeUpdate();
             return true;
@@ -100,7 +100,7 @@ public class AdministradorDAO {
         administrador.setUsuario(rs.getString("usuario"));
         administrador.setContrasena(rs.getString("contrasena"));
         administrador.setNombreCompleto(rs.getString("nombre_completo"));
-        administrador.setFechaCreacion(rs.getDate("fecha_creacion"));
+        administrador.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
         return administrador;
     }
 

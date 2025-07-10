@@ -26,7 +26,7 @@ public class ContactoDAO {
             stmp.setString(2, contacto.getCorreo());
             stmp.setInt(3, contacto.getTelefono());
             stmp.setString(4, contacto.getMensaje());
-            stmp.setDate(5, new java.sql.Date(contacto.getFechaEnvio().getTime()));
+            stmp.setTimestamp(5, new java.sql.Timestamp(contacto.getFechaEnvio().getTime()));
             stmp.setString(6, contacto.getEstado().name());
             stmp.executeUpdate();
             return true;
@@ -74,7 +74,7 @@ public class ContactoDAO {
             stmp.setString(2, contacto.getCorreo());
             stmp.setInt(3, contacto.getTelefono());
             stmp.setString(4, contacto.getMensaje());
-            stmp.setDate(5, new java.sql.Date(contacto.getFechaEnvio().getTime()));
+            stmp.setTimestamp(5, new java.sql.Timestamp(contacto.getFechaEnvio().getTime()));
             stmp.setString(6, contacto.getEstado().name());
             stmp.setInt(7, contacto.getId());
             stmp.executeUpdate();
@@ -106,7 +106,7 @@ public class ContactoDAO {
         contacto.setCorreo(rs.getString("correo_electronico"));
         contacto.setTelefono(rs.getInt("telefono"));
         contacto.setMensaje(rs.getString("mensaje"));
-        contacto.setFechaEnvio(rs.getDate("fecha_envio"));
+        contacto.setFechaEnvio(rs.getTimestamp("fecha_envio"));
         contacto.setEstado(EnumHotel.estadoMensaje.valueOf(rs.getString("estado").toUpperCase()));
         return contacto;
     }

@@ -12,12 +12,11 @@ public class Administrador {
     public Administrador() {
     }
 
-    public Administrador(int id, String usuario, String contrasena, String nombreCompleto, Date fechaCreacion) {
-        this.id = id;
+    public Administrador(String usuario, String contrasena, String nombreCompleto) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombreCompleto = nombreCompleto;
-        this.fechaCreacion = fechaCreacion;
+        this.fechaCreacion = new Date(); // Fecha actual
     }
     
     public int getId() {
