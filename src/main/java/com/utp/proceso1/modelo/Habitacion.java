@@ -10,6 +10,16 @@ public class Habitacion {
 
     public Habitacion() {}
 
+    public Habitacion(String numeroHabitacion, estadoHabitacion estado) {
+        this.numeroHabitacion = numeroHabitacion;
+        this.estado = estado;
+    }
+
+    public Habitacion(String numeroHabitacion, TipoHabitacion tipoHabitacion, estadoHabitacion estado) {
+        this.numeroHabitacion = numeroHabitacion;
+        this.tipoHabitacion = tipoHabitacion;
+        this.estado = estado;
+    }
     public Habitacion(int id, String numeroHabitacion, TipoHabitacion tipoHabitacion, estadoHabitacion estado) {
         this.id = id;
         this.numeroHabitacion = numeroHabitacion;

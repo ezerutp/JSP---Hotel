@@ -9,11 +9,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoHabitacionDao {
+public class TipoHabitacionDAO {
     private Connection connection;
     private final String TABLE_NAME = "tipos_habitacion";
 
-    public TipoHabitacionDao() {
+    public TipoHabitacionDAO() {
         this.connection = conexionServicio.getInstancia().getConexion();
     }
 
@@ -38,6 +38,21 @@ public class TipoHabitacionDao {
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE id_tipo = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setInt(1, id);
+            ResultSet rs = stmp.executeQuery();
+            if (rs.next()) {
+                return mapTipoHabitacion(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // READ by Name
+    public TipoHabitacion getTipoHabitacionByName(String nombre) {
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE nombre = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, nombre);
             ResultSet rs = stmp.executeQuery();
             if (rs.next()) {
                 return mapTipoHabitacion(rs);

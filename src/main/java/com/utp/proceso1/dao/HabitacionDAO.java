@@ -49,6 +49,21 @@ public class HabitacionDAO {
         return null;
     }
 
+    // READ by Numero
+    public Habitacion getHabitacionByNumero(String numero) {
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE numero_habitacion = ?";
+        try (PreparedStatement stmp = connection.prepareStatement(sql)) {
+            stmp.setString(1, numero);
+            ResultSet rs = stmp.executeQuery();
+            if (rs.next()) {
+                return mapHabitacion(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // READ all
     public List<Habitacion> getHabitaciones() {
         List<Habitacion> habitaciones = new ArrayList<>();
@@ -102,7 +117,7 @@ public class HabitacionDAO {
 
         // Obtener el tipo de habitación usando el DAO correspondiente
         int tipoHabitacionId = rs.getInt("id_tipo");
-        TipoHabitacionDao tipoHabitacionDao = new TipoHabitacionDao();
+        TipoHabitacionDAO tipoHabitacionDao = new TipoHabitacionDAO();
         TipoHabitacion tipoHabitacion = tipoHabitacionDao.getTipoHabitacionById(tipoHabitacionId);
         habitacion.setTipoHabitacion(tipoHabitacion);
 

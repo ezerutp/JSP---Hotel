@@ -9,6 +9,13 @@ public class TipoHabitacion {
 
     public TipoHabitacion() {}
 
+    public TipoHabitacion(String nombre, String descripcion, double precio_noche, int capacidad) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio_noche = precio_noche;
+        this.capacidad = capacidad;
+    }
+
     public TipoHabitacion(int id, String nombre, String descripcion, double precio_noche, int capacidad) {
         this.id = id;
         this.nombre = nombre;
