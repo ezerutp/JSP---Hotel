@@ -8,10 +8,10 @@
                 <div class="text-center text-white max-w-4xl mx-auto px-4">
                     <h2 class="text-5xl md:text-7xl font-bold mb-6">Descubre Cusco</h2>
                     <p class="text-xl md:text-2xl mb-8">Vive una experiencia única en el corazón del Imperio Inca</p>
-                    <button
-                        class="bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
+                    <a href="reservar"
+                        class="inline-block bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
                         Reservar Ahora
-                    </button>
+                    </a>
                 </div>
             </div>
             <!-- Slide 2 -->
@@ -22,10 +22,10 @@
                 <div class="text-center text-white max-w-4xl mx-auto px-4">
                     <h2 class="text-5xl md:text-7xl font-bold mb-6">Machu Picchu</h2>
                     <p class="text-xl md:text-2xl mb-8">Explora una de las maravillas del mundo moderno</p>
-                    <button
-                        class="bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
-                        Ver Tours
-                    </button>
+                    <a href="reservar"
+                        class="inline-block bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
+                        Reservar Ahora
+                    </a>
                 </div>
             </div>
             <!-- Slide 3 -->
@@ -36,10 +36,10 @@
                 <div class="text-center text-white max-w-4xl mx-auto px-4">
                     <h2 class="text-5xl md:text-7xl font-bold mb-6">Valle Sagrado</h2>
                     <p class="text-xl md:text-2xl mb-8">Conéctate con la naturaleza y la historia ancestral</p>
-                    <button
-                        class="bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
-                        Explorar
-                    </button>
+                    <a href="reservar"
+                        class="inline-block bg-peru-gold text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-peru-brown transition-colors">
+                        Reservar Ahora
+                    </a>
                 </div>
             </div>
         </div>
