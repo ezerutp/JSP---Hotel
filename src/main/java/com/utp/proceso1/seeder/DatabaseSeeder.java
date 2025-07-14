@@ -50,9 +50,9 @@ public class DatabaseSeeder implements ServletContextListener {
         AdministradorDAO administradorDAO = new AdministradorDAO();
 
         List<Administrador> administradores = List.of(
-                new Administrador("admin", "admin", "Naruto Uzumaki"),
-                new Administrador("user", "user", "Sasuke Uchiha"),
-                new Administrador("guest", "guest", "Sakura Haruno"));
+                new Administrador("admin", "admin", "Naruto Uzumaki", "naruto@example.com", "123456789", true),
+                new Administrador("user", "user", "Sasuke Uchiha", "sasuke@example.com", "987654321", true),
+                new Administrador("guest", "guest", "Sakura Haruno", "sakura@example.com", "456789123", true));
 
         for (Administrador adm : administradores) {
             Administrador existingAdmin = administradorDAO.getAdministradorByUsuario(adm.getUsuario());

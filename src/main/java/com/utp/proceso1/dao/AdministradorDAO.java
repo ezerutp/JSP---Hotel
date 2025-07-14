@@ -19,12 +19,15 @@ public class AdministradorDAO {
 
     // CREATE
     public boolean create(Administrador administrador) {
-        String sql = "INSERT INTO " + TABLE_NAME + " (usuario, contrasena, nombre_completo, fecha_creacion) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (usuario, contrasena, nombre_completo, correo, telefono, estado, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, administrador.getUsuario());
             stmp.setString(2, administrador.getContrasena());
             stmp.setString(3, administrador.getNombreCompleto());
-            stmp.setTimestamp(4, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
+            stmp.setString(4, administrador.getCorreo());
+            stmp.setString(5, administrador.getTelefono());
+            stmp.setBoolean(6, administrador.getEstado());
+            stmp.setTimestamp(7, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -65,13 +68,16 @@ public class AdministradorDAO {
 
     // UPDATE
     public boolean updateAdministrador(Administrador administrador) {
-        String sql = "UPDATE " + TABLE_NAME + " SET usuario = ?, contrasena = ?, nombre_completo = ?, fecha_creacion = ? WHERE id_admin = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET usuario = ?, contrasena = ?, nombre_completo = ?, correo = ?, telefono = ?, estado = ?, fecha_creacion = ? WHERE id_admin = ?";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, administrador.getUsuario());
             stmp.setString(2, administrador.getContrasena());
             stmp.setString(3, administrador.getNombreCompleto());
-            stmp.setTimestamp(4, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
-            stmp.setInt(5, administrador.getId());
+            stmp.setString(4, administrador.getCorreo());
+            stmp.setString(5, administrador.getTelefono());
+            stmp.setBoolean(6, administrador.getEstado());
+            stmp.setTimestamp(7, new java.sql.Timestamp(administrador.getFechaCreacion().getTime()));
+            stmp.setInt(8, administrador.getId());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -100,6 +106,9 @@ public class AdministradorDAO {
         administrador.setUsuario(rs.getString("usuario"));
         administrador.setContrasena(rs.getString("contrasena"));
         administrador.setNombreCompleto(rs.getString("nombre_completo"));
+        administrador.setCorreo(rs.getString("correo"));
+        administrador.setTelefono(rs.getString("telefono"));
+        administrador.setEstado(rs.getBoolean("estado"));
         administrador.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
         return administrador;
     }
