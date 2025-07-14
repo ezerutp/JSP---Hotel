@@ -1,61 +1,77 @@
-
-
--- Tabla de administradores 
-
-
 USE  db_hotelcusco;
 
-CREATE TABLE administradores (
-    id_admin INT AUTO_INCREMENT PRIMARY KEY,
-    usuario VARCHAR(50) NOT NULL UNIQUE,
-    contrasena VARCHAR(255) NOT NULL,
-    nombre_completo VARCHAR(100) NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Volcando estructura para tabla db_hotelcusco.administradores
+CREATE TABLE IF NOT EXISTS `administradores` (
+  `id_admin` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(255) NOT NULL,
+  `nombre_completo` varchar(100) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `estado` tinyint(4) NOT NULL DEFAULT 0,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_admin`),
+  UNIQUE KEY `usuario` (`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tabla de mensajes de contacto
-CREATE TABLE mensajes_contacto (
-    id_mensaje INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_completo VARCHAR(100) NOT NULL,
-    correo_electronico VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
-    mensaje TEXT NOT NULL,
-    fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM('nuevo', 'leido') DEFAULT 'nuevo'
-);
+-- La exportación de datos fue deseleccionada.
 
--- Tabla de tipos de habitación 
-CREATE TABLE tipos_habitacion (
-    id_tipo INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(255),
-    precio_noche DECIMAL(10,2) NOT NULL,
-    capacidad INT NOT NULL
-);
+-- Volcando estructura para tabla db_hotelcusco.habitaciones
+CREATE TABLE IF NOT EXISTS `habitaciones` (
+  `id_habitacion` int(11) NOT NULL AUTO_INCREMENT,
+  `numero_habitacion` varchar(255) NOT NULL,
+  `id_tipo` int(11) NOT NULL,
+  `estado` enum('DISPONIBLE','OCUPADA') DEFAULT 'DISPONIBLE',
+  PRIMARY KEY (`id_habitacion`),
+  UNIQUE KEY `numero_habitacion` (`numero_habitacion`),
+  KEY `id_tipo` (`id_tipo`),
+  CONSTRAINT `habitaciones_ibfk_1` FOREIGN KEY (`id_tipo`) REFERENCES `tipos_habitacion` (`id_tipo`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tabla de habitaciones 
-CREATE TABLE habitaciones (
-    id_habitacion INT AUTO_INCREMENT PRIMARY KEY,
-    numero_habitacion VARCHAR(10) NOT NULL UNIQUE,
-    id_tipo INT NOT NULL,
-    estado ENUM('disponible', 'ocupada') DEFAULT 'disponible',
-    FOREIGN KEY (id_tipo) REFERENCES tipos_habitacion(id_tipo)
-);
+-- La exportación de datos fue deseleccionada.
 
--- Tabla de reserva (mejorada con todos los campos necesarios)
-CREATE TABLE reserva (
-    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
-    id_habitacion INT NOT NULL,
-    nombre_huesped VARCHAR(100) NOT NULL,
-    correo_huesped VARCHAR(100) NOT NULL DEFAULT 'no-definido@hotel.com',
-    telefono_huesped VARCHAR(15) NOT NULL DEFAULT '000000000',
-    fecha_checkin DATE NOT NULL,
-    fecha_checkout DATE NOT NULL,
-    cantidad_personas INT NOT NULL,
-    precio_noche DECIMAL(10,2) DEFAULT 0,
-    total_pagar DECIMAL(10,2) DEFAULT 0,
-    estado_reserva ENUM('pendiente', 'confirmada', 'cancelada', 'completada') DEFAULT 'pendiente',
-    fecha_reserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    notas TEXT,
-    FOREIGN KEY (id_habitacion) REFERENCES habitaciones(id_habitacion)
-);
+-- Volcando estructura para tabla db_hotelcusco.mensajes_contacto
+CREATE TABLE IF NOT EXISTS `mensajes_contacto` (
+  `id_mensaje` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_completo` varchar(100) NOT NULL,
+  `correo_electronico` varchar(100) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `mensaje` text NOT NULL,
+  `fecha_envio` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estado` enum('nuevo','leido') DEFAULT 'nuevo',
+  PRIMARY KEY (`id_mensaje`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla db_hotelcusco.reserva
+CREATE TABLE IF NOT EXISTS `reserva` (
+  `id_reserva` int(11) NOT NULL AUTO_INCREMENT,
+  `id_habitacion` int(11) NOT NULL,
+  `nombre_huesped` varchar(100) NOT NULL,
+  `correo_huesped` varchar(100) NOT NULL DEFAULT 'no-definido@hotel.com',
+  `telefono_huesped` varchar(15) NOT NULL DEFAULT '000000000',
+  `fecha_checkin` date NOT NULL,
+  `fecha_checkout` date NOT NULL,
+  `cantidad_personas` int(11) NOT NULL,
+  `precio_noche` decimal(10,2) DEFAULT 0.00,
+  `total_pagar` decimal(10,2) DEFAULT 0.00,
+  `estado_reserva` enum('pendiente','confirmada','cancelada','completada') DEFAULT 'pendiente',
+  `fecha_reserva` timestamp NOT NULL DEFAULT current_timestamp(),
+  `notas` text DEFAULT NULL,
+  PRIMARY KEY (`id_reserva`),
+  KEY `id_habitacion` (`id_habitacion`),
+  CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id_habitacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla db_hotelcusco.tipos_habitacion
+CREATE TABLE IF NOT EXISTS `tipos_habitacion` (
+  `id_tipo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `precio_noche` double NOT NULL,
+  `capacidad` int(11) NOT NULL,
+  PRIMARY KEY (`id_tipo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
