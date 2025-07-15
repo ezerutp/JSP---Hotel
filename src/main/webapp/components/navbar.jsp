@@ -17,9 +17,9 @@
                         class="text-gray-700 hover:text-peru-brown px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
                     <a href="#habitaciones"
                         class="text-gray-700 hover:text-peru-brown px-3 py-2 rounded-md text-sm font-medium transition-colors">Habitaciones</a>
-                    <a href="#contacto"
+                    <a href="contacto"
                         class="text-gray-700 hover:text-peru-brown px-3 py-2 rounded-md text-sm font-medium transition-colors">Contacto</a>
-                    <a href="login.jsp"
+                    <a href="administrador"
                         class="bg-peru-brown text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-peru-gold transition-colors">Iniciar
                         Sesión</a>
                 </div>
