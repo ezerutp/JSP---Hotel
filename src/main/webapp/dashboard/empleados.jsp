@@ -41,7 +41,7 @@
 
                 <nav class="mt-8">
                     <div class="px-4 space-y-2">
-                        <a href="index.jsp"
+                        <a href="/Proceso1/dashboard/"
                             class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                             <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
                             Dashboard
@@ -50,22 +50,22 @@
                             <i class="fas fa-users w-5 h-5 mr-3"></i>
                             Empleados
                         </a>
-                        <a href="habitaciones.jsp"
+                        <a href="habitaciones"
                             class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                             <i class="fas fa-bed w-5 h-5 mr-3"></i>
                             Habitaciones
                         </a>
-                        <a href="reservas.jsp"
+                        <a href="reservas"
                             class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                             <i class="fas fa-calendar-check w-5 h-5 mr-3"></i>
                             Reservas
                         </a>
-                        <a href="mensajes.jsp"
+                        <a href="mensajes"
                             class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                             <i class="fas fa-envelope w-5 h-5 mr-3"></i>
                             Mensajes
                         </a>
-                        <a href="reportes.jsp"
+                        <a href="reportes"
                             class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                             <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
                             Reportes
@@ -195,7 +195,12 @@
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                         <button class="text-blue-600 hover:text-blue-900 mr-3 edit-btn"
-                                                            data-id="${admin.id}">
+                                                            data-id="${admin.id}"
+                                                            data-nombre="${admin.nombreCompleto}"
+                                                            data-correo="${admin.correo}"
+                                                            data-usuario="${admin.usuario}"
+                                                            data-telefono="${admin.telefono}"
+                                                            data-estado="${admin.estado ? 'activo' : 'inactivo'}">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
                                                         <button class="text-red-600 hover:text-red-900 delete-btn"
@@ -227,6 +232,7 @@
                         </div>
 
                         <form id="employeeForm" class="p-6 space-y-4" method="post" action="empleados">
+                            <input type="hidden" name="id" id="id" value="">
                             <input type="hidden" name="opt" id="opt" value="2">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
@@ -307,18 +313,13 @@
                 const employeeForm = document.getElementById('employeeForm');
                 const modalTitle = document.getElementById('modalTitle');
                 const optValue = document.getElementById('opt');
+                const employeeIdInput = document.getElementById('id');
 
+                // Funcion para abrir el modal de nuevo empleado
                 addEmployeeBtn.addEventListener('click', function () {
                     modalTitle.textContent = 'Nuevo Empleado';
-                    employeeForm.reset();
-                    
-                    // Remover campo de ID si existe (para asegurar que es un nuevo empleado)
-                    const employeeIdInput = document.getElementById('employeeId');
-                    if (employeeIdInput) {
-                        employeeIdInput.remove();
-                    }
-                    
-                    optValue.value = '2'; // Set option for adding new employee
+                    employeeForm.reset();                    
+                    optValue.value = '2';
                     modal.classList.remove('hidden');
                 });
 
@@ -334,16 +335,14 @@
                 document.querySelectorAll('.edit-btn').forEach(btn => {
                     btn.addEventListener('click', function (e) {
                         const button = e.currentTarget;
-                        const row = button.closest('tr');
                         
                         // Obtener datos de la fila
-                        const employeeId = button.dataset.id;
-                        const nombreCompleto = row.querySelector('.text-sm.font-medium').textContent.trim();
-                        const correo = row.querySelector('.text-sm.text-gray-500').textContent.trim();
-                        const usuario = row.querySelector('.bg-blue-100').textContent.trim();
-                        const telefono = row.querySelectorAll('td')[3].textContent.trim();
-                        const estadoElement = row.querySelector('.bg-green-100, .bg-red-100');
-                        const estado = estadoElement ? (estadoElement.textContent.trim() === 'Activo' ? 'activo' : 'inactivo') : 'activo';
+                        const id = button.dataset.id;
+                        const nombreCompleto = button.dataset.nombre;
+                        const correo = button.dataset.correo;
+                        const usuario = button.dataset.usuario;
+                        const telefono = button.dataset.telefono;
+                        const estado = button.dataset.estado;
                         
                         // Llenar el formulario
                         document.getElementById('nombreCompleto').value = nombreCompleto;
@@ -351,18 +350,8 @@
                         document.getElementById('usuario').value = usuario;
                         document.getElementById('telefono').value = telefono;
                         document.getElementById('estado').value = estado;
-                        
-                        // Agregar campo oculto para el ID del empleado
-                        let employeeIdInput = document.getElementById('employeeId');
-                        if (!employeeIdInput) {
-                            employeeIdInput = document.createElement('input');
-                            employeeIdInput.type = 'hidden';
-                            employeeIdInput.name = 'id';
-                            employeeIdInput.id = 'employeeId';
-                            employeeForm.appendChild(employeeIdInput);
-                        }
-                        employeeIdInput.value = employeeId;
-                        
+                        employeeIdInput.value = id;
+
                         modalTitle.textContent = 'Editar Empleado';
                         optValue.value = '3'; // Set option for editing employee
                         modal.classList.remove('hidden');
@@ -372,12 +361,8 @@
                 // Delete employee functionality
                 document.querySelectorAll('.delete-btn').forEach(btn => {
                     btn.addEventListener('click', function (e) {
-                        const button = e.currentTarget;
-                        const employeeId = button.dataset.id;
-                        if (employeeId && confirm('¿Estás seguro de que quieres eliminar este empleado?')) {
-                            window.location.href = `empleados?opt=4&id=` + employeeId; // Ojo aqui, es concatenar con + para que funcione
-                        } else {
-                            alert("Error: No se pudo obtener el ID del empleado.");
+                        if (confirm('¿Estás seguro de que quieres eliminar este empleado?')) {
+                            window.location.href = `empleados?opt=4&id=` + this.dataset.id; // Ojo aqui, es concatenar con + para que funcione
                         }
                     });
                 });
