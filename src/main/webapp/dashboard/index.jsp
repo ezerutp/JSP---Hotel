@@ -48,11 +48,11 @@
                     <i class="fas fa-users w-5 h-5 mr-3"></i>
                     Empleados
                 </a>
-                <a href="habitaciones.jsp" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="habitaciones" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-bed w-5 h-5 mr-3"></i>
                     Habitaciones
                 </a>
-                <a href="reservas.jsp" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="reservas" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-calendar-check w-5 h-5 mr-3"></i>
                     Reservas
                 </a>
@@ -60,7 +60,7 @@
                     <i class="fas fa-envelope w-5 h-5 mr-3"></i>
                     Mensajes
                 </a>
-                <a href="reportes.jsp" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="reportes" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
                     Reportes
                 </a>

@@ -39,7 +39,7 @@ public class EmpleadosServlet extends HttpServlet {
             request.getRequestDispatcher("/dashboard/empleados.jsp").forward(request, response);
             return;
         }
-        response.sendRedirect(request.getContextPath() + "/dashboard/empleados?opt=1");
+        response.sendRedirect(request.getContextPath() + "/dashboard/empleados");
     }
 
     protected void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +63,7 @@ public class EmpleadosServlet extends HttpServlet {
             request.getRequestDispatcher("/dashboard/empleados.jsp").forward(request, response);
             return;
         }
-        response.sendRedirect(request.getContextPath() + "/dashboard/empleados?opt=1");
+        response.sendRedirect(request.getContextPath() + "/dashboard/empleados");
     }
 
     protected void eliminarEmpleado(HttpServletRequest request, HttpServletResponse response)
@@ -74,7 +74,7 @@ public class EmpleadosServlet extends HttpServlet {
         if (!success) {
             request.setAttribute("error", "Error al eliminar el empleado.");
         }
-        response.sendRedirect(request.getContextPath() + "/dashboard/empleados?opt=1");
+        response.sendRedirect(request.getContextPath() + "/dashboard/empleados");
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -41,7 +41,7 @@
 
           <!-- Botones -->
           <div class="flex gap-3">
-            <a href="index.jsp" 
+            <a href="/Proceso1/" 
                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 text-center inline-flex items-center justify-center">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>

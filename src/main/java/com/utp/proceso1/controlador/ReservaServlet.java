@@ -23,13 +23,14 @@ public class ReservaServlet extends HttpServlet {
 
         // Validar que todos los campos requeridos estén presentes y no estén vacíos
         if (isNullOrEmpty(request.getParameter("nombre_huesped")) ||
-                isNullOrEmpty(request.getParameter("correo_huesped")) ||
-                isNullOrEmpty(request.getParameter("telefono_huesped")) ||
-                isNullOrEmpty(request.getParameter("id_habitacion")) ||
-                isNullOrEmpty(request.getParameter("fecha_checkin")) ||
-                isNullOrEmpty(request.getParameter("fecha_checkout")) ||
-                isNullOrEmpty(request.getParameter("cantidad_personas"))) {
-            response.sendRedirect("reservar.jsp?error=Campos+obligatorios+faltantes");
+            isNullOrEmpty(request.getParameter("correo_huesped")) ||
+            isNullOrEmpty(request.getParameter("telefono_huesped")) ||
+            isNullOrEmpty(request.getParameter("id_habitacion")) ||
+            isNullOrEmpty(request.getParameter("fecha_checkin")) ||
+            isNullOrEmpty(request.getParameter("fecha_checkout")) ||
+            isNullOrEmpty(request.getParameter("cantidad_personas"))) {
+            request.setAttribute("error", "Campos obligatorios faltantes");
+            request.getRequestDispatcher("/reservar").forward(request, response);
             return;
         }
 
@@ -52,8 +53,9 @@ public class ReservaServlet extends HttpServlet {
 
             // Verificar si es que el checkout es antes del checkin
             if (!checkout.after(checkin)) {
-                response.sendRedirect("reservar.jsp?error=Fechas+inválidas");
-                return;
+            request.setAttribute("error", "Fechas inválidas");
+            request.getRequestDispatcher("/reservar").forward(request, response);
+            return;
             }
 
             // Obtener la habitación usando HabitacionDAO
@@ -86,19 +88,23 @@ public class ReservaServlet extends HttpServlet {
             boolean exito = reservaDAO.create(reserva);
 
             if (exito) {
-                boolean actualizado = habitacionDAO.updateEstadoHabitacion(numeroHabitacion,
-                        EnumHotel.estadoHabitacion.OCUPADA);
-                if (actualizado) {
-                    response.sendRedirect("reservaExitosa.jsp?success=Reserva+registrada+con+éxito");
-                } else {
-                    response.sendRedirect("reservar.jsp?error=Error+al+actualizar+estado+de+habitacion");
-                }
+            boolean actualizado = habitacionDAO.updateEstadoHabitacion(numeroHabitacion,
+                EnumHotel.estadoHabitacion.OCUPADA);
+            if (actualizado) {
+                request.setAttribute("success", "Reserva registrada con éxito");
+                request.getRequestDispatcher("/reservaExitosa.jsp").forward(request, response);
             } else {
-                response.sendRedirect("reservar.jsp?error=Error+al+registrar+reserva");
+                request.setAttribute("error", "Error al actualizar estado de habitación");
+                request.getRequestDispatcher("/reservar").forward(request, response);
+            }
+            } else {
+            request.setAttribute("error", "Error al registrar reserva");
+            request.getRequestDispatcher("/reservar").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("reservar.jsp?error=Error+del+sistema");
+            request.setAttribute("error", "Error del sistema");
+            request.getRequestDispatcher("/reservar").forward(request, response);
         }
     }
 

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Reserva - Hotel Cusco</title>
+    <link rel="stylesheet" href="/css/reservar.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script>
@@ -26,117 +27,6 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .gradient-bg {
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            background-color: #f8fafc;
-        }
-        
-        .background-slideshow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
-        
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-            filter: blur(10px);
-        }
-        
-        .bg-image.active {
-            opacity: 0.9;
-        }
-        
-        .bg-image:nth-child(1) { background-image: url('imagenes/Machu_Picchu_maravilla_del_mundo.jpg'); }
-        .bg-image:nth-child(2) { background-image: url('imagenes/Plaza-de-Armas-Cusco.jpg'); }
-        .bg-image:nth-child(3) { background-image: url('imagenes/valle_sagrado.jpg'); }
-        .bg-image:nth-child(4) { background-image: url('imagenes/montaña7colores.jpg'); }
-        .bg-image:nth-child(5) { background-image: url('imagenes/cuzco1.jpg'); }
-        .bg-image:nth-child(6) { background-image: url('imagenes/sacsa.jpg'); }
-        
-        .form-shadow {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .input-focus:focus {
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.2);
-            border-color: rgb(139, 69, 19) !important;
-            ring-color: rgb(139, 69, 19) !important;
-        }
-        
-        .custom-input:focus {
-            outline: none;
-            border-color: rgb(139, 69, 19);
-            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
-        }
-        
-        .custom-label {
-            color: rgb(139, 69, 19);
-        }
-        
-        .custom-icon {
-            color: rgb(139, 69, 19);
-        }
-        
-        .blur-background {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .content-container {
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* Indicadores del slideshow */
-        .slideshow-indicators {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 15;
-        }
-        
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-        
-        .indicator.active {
-            background: rgba(139, 69, 19, 0.8);
-            transform: scale(1.2);
-        }
-    </style>
 </head>
 <body class="gradient-bg min-h-screen py-12 px-4 sm:px-6 lg:px-8">
     <!-- Slideshow de imágenes de fondo con blur -->
@@ -292,7 +182,7 @@
                     
                     <!-- Botones de acción -->
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-gray-200">
-                        <a href="index.jsp" 
+                        <a href="/Proceso1/" 
                            class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 bg-white">
                             <i class="bi bi-arrow-left mr-2"></i> Cancelar
                         </a>
