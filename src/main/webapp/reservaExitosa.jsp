@@ -30,10 +30,10 @@
                     <p class="lead mb-4">Su reserva ha sido registrada exitosamente en nuestro sistema.</p>
                     
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="registrarReserva.jsp" class="btn btn-light btn-lg px-4 py-2">
+                        <a href="reservar" class="btn btn-light btn-lg px-4 py-2">
                             <i class="bi bi-plus-circle me-2"></i>Nueva Reserva
                         </a>
-                        <a href="index.jsp" class="btn btn-outline-light btn-lg px-4 py-2">
+                        <a href="/Proceso1/" class="btn btn-outline-light btn-lg px-4 py-2">
                             <i class="bi bi-house me-2"></i>Inicio
                         </a>
                     </div>

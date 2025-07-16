@@ -62,7 +62,7 @@ public class AdministradorServlet extends HttpServlet {
                 session.removeAttribute("originalURL");
                 response.sendRedirect(originalURL);
             } else {
-                response.sendRedirect(request.getContextPath() + "/dashboard/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/dashboard/empleados");
             }
         } else {
             mensajeError = "Usuario o contraseña incorrectos.";

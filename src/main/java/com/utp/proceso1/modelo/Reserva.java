@@ -5,7 +5,7 @@ import com.utp.proceso1.utilidades.EnumHotel.estadoReserva;
 import java.util.Date;
 
 public class Reserva {
-    private int idReserva;
+    private int id;
     private Habitacion idHabitacion;
     private String nombreHuesped;
     private String correoHuesped;
@@ -21,8 +21,8 @@ public class Reserva {
     
     public Reserva() {}
 
-    public Reserva(int idReserva, Habitacion idHabitacion, String nombreHuesped, String correoHuesped, String telefonoHuesped, Date fechaCheckin, Date fechaCheckout, int cantidadPersonas, double precioNoche, double totalPagar, estadoReserva estadoReserva, Date fechaReserva, String notas) {
-        this.idReserva = idReserva;
+    public Reserva(int id, Habitacion idHabitacion, String nombreHuesped, String correoHuesped, String telefonoHuesped, Date fechaCheckin, Date fechaCheckout, int cantidadPersonas, double precioNoche, double totalPagar, estadoReserva estadoReserva, Date fechaReserva, String notas) {
+        this.id = id;
         this.idHabitacion = idHabitacion;
         this.nombreHuesped = nombreHuesped;
         this.correoHuesped = correoHuesped;
@@ -39,12 +39,21 @@ public class Reserva {
 
     // Getters y Setters
 
-    public int getIdReserva() {
-        return idReserva;
+    public int getId() {
+        return id;
     }
 
-    public void setIdReserva(int idReserva) {
-        this.idReserva = idReserva;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCodigo(){
+        return String.format("RES-%03d", id);
+    }
+
+    public void setCodigo(String codigo) {
+        // Este método no es necesario, ya que el código se genera automáticamente
+        // a partir del ID de la reserva.
     }
 
     public Habitacion getIdHabitacion() {
@@ -141,5 +150,19 @@ public class Reserva {
 
     public void setNotas(String notas) {
         this.notas = notas;
+    }
+
+    public int getDiasHospedaje() {
+        if (fechaCheckin != null && fechaCheckout != null) {
+            long diff = fechaCheckout.getTime() - fechaCheckin.getTime();
+            return (int) (diff / (1000 * 60 * 60 * 24));
+        }
+        return 0; // Si las fechas no están definidas, retornamos 0 días
+    }
+
+    public void setDiasHospedaje(int diasHospedaje) {
+        // Este método no es necesario, ya que los días de hospedaje se calculan automáticamente
+        // a partir de las fechas de check-in y check-out.
+        // Este método solo es para JSP y no tiene lógica en el modelo.
     }
 }
