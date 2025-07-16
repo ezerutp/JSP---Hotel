@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_admin`),
   UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `habitaciones` (
   UNIQUE KEY `numero_habitacion` (`numero_habitacion`),
   KEY `id_tipo` (`id_tipo`),
   CONSTRAINT `habitaciones_ibfk_1` FOREIGN KEY (`id_tipo`) REFERENCES `tipos_habitacion` (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `mensajes_contacto` (
   `fecha_envio` timestamp NOT NULL DEFAULT current_timestamp(),
   `estado` enum('nuevo','leido') DEFAULT 'nuevo',
   PRIMARY KEY (`id_mensaje`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -56,13 +56,13 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `cantidad_personas` int(11) NOT NULL,
   `precio_noche` decimal(10,2) DEFAULT 0.00,
   `total_pagar` decimal(10,2) DEFAULT 0.00,
-  `estado_reserva` enum('pendiente','confirmada','cancelada','completada') DEFAULT 'pendiente',
+  `estado_reserva` enum('PENDIENTE','CONFIRMADA','CANCELADA','COMPLETADA') DEFAULT 'PENDIENTE',
   `fecha_reserva` timestamp NOT NULL DEFAULT current_timestamp(),
-  `notas` text DEFAULT NULL,
+  `notas` text NOT NULL,
   PRIMARY KEY (`id_reserva`),
   KEY `id_habitacion` (`id_habitacion`),
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id_habitacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `tipos_habitacion` (
   `id_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  `precio_noche` double NOT NULL,
+  `precio_noche` decimal(10,2) DEFAULT NULL,
   `capacidad` int(11) NOT NULL,
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
