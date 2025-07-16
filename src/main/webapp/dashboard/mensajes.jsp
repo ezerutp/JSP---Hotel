@@ -110,7 +110,7 @@
         <!-- Messages Content -->
         <div class="p-6">
             <!-- Stats Summary -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div class="bg-white p-4 rounded-lg shadow-md">
                     <div class="flex items-center justify-between">
                         <div>
@@ -126,7 +126,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-600">No Leídos</p>
-                            <p class="text-2xl font-bold text-red-600">8</p>
+                            <p class="text-2xl font-bold text-red-600">4</p>
                         </div>
                         <div class="bg-red-100 p-3 rounded-full">
                             <i class="fas fa-envelope-open text-red-600"></i>
@@ -137,7 +137,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-600">Hoy</p>
-                            <p class="text-2xl font-bold text-purple-600">5</p>
+                            <p class="text-2xl font-bold text-purple-600">2</p>
                         </div>
                         <div class="bg-purple-100 p-3 rounded-full">
                             <i class="fas fa-clock text-purple-600"></i>
@@ -213,7 +213,38 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                                                <span class="text-white font-bold text-sm">PM</span>
+                                                <span class="text-white font-bold text-sm">
+                                                <%-- Asignamos el valor de c.nombreCompleto a una variable de ámbito de página
+                                                    para que el scriptlet pueda acceder a ella. --%>
+                                                <c:set var="currentNombreCompleto" value="${c.nombreCompleto}" scope="page" />
+                                                <%
+                                                    // Ahora 'currentNombreCompleto' está disponible en el pageContext
+                                                    String nombreCompleto = (String) pageContext.getAttribute("currentNombreCompleto");
+
+                                                    if (nombreCompleto == null) {
+                                                        nombreCompleto = ""; // Asegurarse de que no sea nulo
+                                                    }
+                                                    String[] palabras = nombreCompleto.split("\\s+"); // Dividir por uno o más espacios
+                                                    String iniciales = "";
+                                                    if (palabras.length > 0) {
+                                                        iniciales += palabras[0].charAt(0); // Primera inicial de la primera palabra
+                                                        if (palabras.length > 1) {
+                                                            // Busca la última palabra no vacía si hay más de una
+                                                            String ultimaPalabraValida = "";
+                                                            for (int i = palabras.length - 1; i >= 0; i--) {
+                                                                if (!palabras[i].trim().isEmpty()) {
+                                                                    ultimaPalabraValida = palabras[i];
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if (!ultimaPalabraValida.isEmpty()) {
+                                                                iniciales += ultimaPalabraValida.charAt(0); // Primera inicial de la última palabra
+                                                            }
+                                                        }
+                                                    }
+                                                    out.print(iniciales.toUpperCase());
+                                                %>
+                                            </span>
                                             </div>
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900"><c:out value="${c.nombreCompleto}" /></div>
@@ -239,10 +270,15 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="1">
+                                            <button class="text-blue-600 hover:text-blue-900 view-btn" 
+                                                    data-id="${c.id}"
+                                                    data-nombre="${c.nombreCompleto}"
+                                                    data-correo="${c.correo}"
+                                                    data-fecha="${c.fechaEnvio}"
+                                                    data-mensaje="${c.mensaje}">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <button class="text-green-600 hover:text-green-900 reply-btn" data-id="1">
+                                            <button class="text-green-600 hover:text-green-900 reply-btn" data-id="${c.id}" data-correo="${c.correo}" data-nombre="${c.nombreCompleto}">
                                                 <i class="fas fa-reply"></i>
                                             </button>
                                         </div>
@@ -276,16 +312,15 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
-                                <span class="text-white font-bold">PM</span>
+                                <span class="text-white font-bold" id="iniciales"></span>
                             </div>
                             <div>
-                                <div class="font-medium text-gray-900">Pedro Martínez</div>
-                                <div class="text-sm text-gray-500">pedro.martinez@email.com</div>
+                                <div class="font-medium text-gray-900" id="nombreCompleto"></div>
+                                <div class="text-sm text-gray-500" id="correoText"></div>
                             </div>
                         </div>
                         <div class="text-sm text-gray-500">
-                            <div>10/07/2025</div>
-                            <div>14:30</div>
+                            <div id="fecha"></div>
                         </div>
                     </div>
                     
@@ -298,11 +333,7 @@
                         </div>
                         
                         <div class="bg-gray-50 p-4 rounded-lg">
-                            <p class="text-gray-700">
-                                Hola, me gustaría saber si tienen disponibilidad para el próximo fin de semana (sábado 13 y domingo 14 de julio). 
-                                Somos una pareja y nos interesa una habitación con vista al mar. También nos gustaría conocer los precios y 
-                                qué servicios incluyen. Esperamos su pronta respuesta.
-                            </p>
+                            <p class="text-gray-700" id="mensaje"></p>
                         </div>
                     </div>
                     
@@ -333,15 +364,15 @@
                     </button>
                 </div>
                 
-                <form id="replyForm" class="p-6 space-y-4">
+                <form id="replyForm" action="contacto" method="post" class="p-6 space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Para:</label>
-                        <input type="email" id="replyTo" value="pedro.martinez@email.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                        <input type="email" id="correo" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
                     </div>
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Asunto:</label>
-                        <input type="text" id="replySubject" value="Re: Consulta sobre disponibilidad" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="text" id="asunto" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     </div>
                     
                     <div>
@@ -462,8 +493,29 @@
         // View message functionality
         document.querySelectorAll('.view-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                document.getElementById('nombreCompleto').textContent  = this.dataset.nombre;
+                document.getElementById('correoText').textContent  = this.dataset.correo;
+                document.getElementById('fecha').textContent   = this.dataset.fecha;
+                document.getElementById('mensaje').textContent = this.dataset.mensaje;
+                
+                const nombreCompleto = this.dataset.nombre;
+                const palabras = nombreCompleto.split(' ');
+                let iniciales = '';
+                if (palabras.length > 0) {
+                    iniciales += palabras[0].charAt(0);
+                    if (palabras.length > 1) {
+                        iniciales += palabras[palabras.length - 1].charAt(0);
+                    }
+                }
+                document.getElementById('iniciales').textContent = iniciales.toUpperCase();
+                
+                replyForm.dataset.nombre  = document.getElementById('nombreCompleto').textContent;
+                replyForm.dataset.correo  = document.getElementById('correoText').textContent;
+                replyForm.dataset.fecha   = document.getElementById('fecha').textContent;
+                replyForm.dataset.mensaje = document.getElementById('mensaje').textContent;
+
                 viewMessageModal.classList.remove('hidden');
-                // Mark as read when viewed
+
                 const row = this.closest('tr');
                 if (row.classList.contains('unread')) {
                     row.classList.remove('unread');
@@ -477,12 +529,24 @@
 
         // Reply functionality
         document.querySelectorAll('.reply-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
                 replyModal.classList.remove('hidden');
+                const button = e.currentTarget;
+                
+                const correo = button.dataset.correo;
+                const nombre = button.dataset.nombre;
+                document.getElementById('correo').value = correo;
+                document.getElementById('asunto').value = 'RE: Consulta ' + nombre ;
             });
         });
 
         document.getElementById('replyFromViewBtn').addEventListener('click', function() {
+            const nombre  = replyForm.dataset.nombre;
+            const correo  = replyForm.dataset.correo;
+
+            document.getElementById('correo').value  = correo;
+            document.getElementById('asunto').value = "RE: Consulta " + nombre;
+  
             viewMessageModal.classList.add('hidden');
             replyModal.classList.remove('hidden');
         });
