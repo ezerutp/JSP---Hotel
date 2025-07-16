@@ -10,7 +10,7 @@ public class conexionServicio {
     private Connection conexion;
     private static final String URL = "jdbc:mysql://localhost:3306/db_hotelcusco";
     private static final String USUARIO = "root";
-    private static final String CONTRASENA = "";
+    private static final String CONTRASENA = "admin";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     private conexionServicio() {

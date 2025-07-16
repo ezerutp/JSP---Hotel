@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -96,7 +99,7 @@
                         <i class="fas fa-check-double mr-1"></i>
                         Marcar todos como leídos
                     </button>
-                    <button id="composeBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button id="composeBtn" style="display: none !important" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                         <i class="fas fa-plus mr-2"></i>
                         Nuevo Mensaje
                     </button>
@@ -112,7 +115,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-600">Total Mensajes</p>
-                            <p class="text-2xl font-bold text-gray-800">47</p>
+                            <p class="text-2xl font-bold text-gray-800">${empty contactosList ? 0 : fn:length(contactosList)}</p>
                         </div>
                         <div class="bg-blue-100 p-3 rounded-full">
                             <i class="fas fa-envelope text-blue-600"></i>
@@ -127,17 +130,6 @@
                         </div>
                         <div class="bg-red-100 p-3 rounded-full">
                             <i class="fas fa-envelope-open text-red-600"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-600">Respondidos</p>
-                            <p class="text-2xl font-bold text-green-600">32</p>
-                        </div>
-                        <div class="bg-green-100 p-3 rounded-full">
-                            <i class="fas fa-reply text-green-600"></i>
                         </div>
                     </div>
                 </div>
@@ -213,147 +205,55 @@
                             </tr>
                         </thead>
                         <tbody id="messagesTableBody" class="bg-white divide-y divide-gray-200">
-                            <tr class="message-row unread" data-status="no-leido">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <input type="checkbox" class="message-checkbox rounded text-blue-600 focus:ring-blue-500">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                                            <span class="text-white font-bold text-sm">PM</span>
+                            <c:forEach var="c" items="${contactosList}">
+                                <tr class="message-row unread" data-status="no-leido">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <input type="checkbox" class="message-checkbox rounded text-blue-600 focus:ring-blue-500">
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                                <span class="text-white font-bold text-sm">PM</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900"><c:out value="${c.nombreCompleto}" /></div>
+                                                <div class="text-sm text-gray-500"><c:out value="${c.correo}" /></div>
+                                            </div>
                                         </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">Pedro Martínez</div>
-                                            <div class="text-sm text-gray-500">pedro.martinez@email.com</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm text-gray-500"><c:out value="${c.mensaje}" /></div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                                            Consulta
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900"><fmt:formatDate value="${c.fechaEnvio}" pattern="yyyy-MM-dd HH:mm" /></div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                                            No leído
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="text-green-600 hover:text-green-900 reply-btn" data-id="1">
+                                                <i class="fas fa-reply"></i>
+                                            </button>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 font-medium">Consulta sobre disponibilidad</div>
-                                    <div class="text-sm text-gray-500">Hola, me gustaría saber si tienen disponibilidad para el próximo fin de semana...</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                                        Consulta
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">10/07/2025</div>
-                                    <div class="text-sm text-gray-500">14:30</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                                        No leído
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center space-x-2">
-                                        <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="1">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-green-600 hover:text-green-900 reply-btn" data-id="1">
-                                            <i class="fas fa-reply"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 delete-btn" data-id="1">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="message-row" data-status="leido">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <input type="checkbox" class="message-checkbox rounded text-blue-600 focus:ring-blue-500">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                                            <span class="text-white font-bold text-sm">LF</span>
-                                        </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">Laura Fernández</div>
-                                            <div class="text-sm text-gray-500">laura.fernandez@email.com</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 font-medium">Servicios adicionales</div>
-                                    <div class="text-sm text-gray-500">Quisiera información sobre los servicios de spa y tours que ofrecen...</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">
-                                        Sugerencia
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">09/07/2025</div>
-                                    <div class="text-sm text-gray-500">16:45</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                                        Respondido
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center space-x-2">
-                                        <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="2">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-green-600 hover:text-green-900 reply-btn" data-id="2">
-                                            <i class="fas fa-reply"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 delete-btn" data-id="2">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="message-row unread" data-status="no-leido">
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <input type="checkbox" class="message-checkbox rounded text-blue-600 focus:ring-blue-500">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
-                                            <span class="text-white font-bold text-sm">JS</span>
-                                        </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">Juan Silva</div>
-                                            <div class="text-sm text-gray-500">juan.silva@email.com</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 font-medium">Problema con reserva</div>
-                                    <div class="text-sm text-gray-500">Tengo un problema con mi reserva #RES-045, necesito modificar las fechas...</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                                        Queja
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">10/07/2025</div>
-                                    <div class="text-sm text-gray-500">09:15</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                                        No leído
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center space-x-2">
-                                        <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="3">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-green-600 hover:text-green-900 reply-btn" data-id="3">
-                                            <i class="fas fa-reply"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 delete-btn" data-id="3">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            <c:if test="${empty contactosList}">
+                              <tr>
+                                <td colspan="6" class="text-center">No hay mensajes registrados.</td>
+                              </tr>
+                            </c:if>
                         </tbody>
                     </table>
                 </div>
@@ -682,5 +582,5 @@
         window.addEventListener('resize', handleResize);
         handleResize();
     </script>
-</body>
+</body
 </html>

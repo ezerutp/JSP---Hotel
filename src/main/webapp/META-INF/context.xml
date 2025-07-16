@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/Proceso1">
-    <!-- Configuración del pool de conexiones MySQL -->
-    <Resource name="jdbc/db_hotelcusco"
-              auth="Container"
-              type="javax.sql.DataSource"
-              maxTotal="100"
-              maxIdle="30"
-              maxWaitMillis="10000"
-              username="root"
-              password=""
-              driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/db_hotelcusco?useSSL=false&amp;serverTimezone=UTC"
-              validationQuery="SELECT 1"
-              testOnBorrow="true"/>
-
-    <!-- Configuración adicional para JSP -->
-    <JarScanner scanClassPath="false"/>
-    
-    <!-- Habilitar cookies de sesión -->
-    <CookieProcessor sameSiteCookies="none"/>
+  <!-- Configuración del pool de conexiones MySQL -->
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/db_hotelcusco" password="" testOnBorrow="true" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/db_hotelcusco?useSSL=false&amp;serverTimezone=UTC" username="root" validationQuery="SELECT 1"/>
+  <!-- Configuración adicional para JSP -->
+  <JarScanner scanClassPath="false"/>
+  <!-- Habilitar cookies de sesión -->
+  <CookieProcessor sameSiteCookies="none"/>
 </Context>

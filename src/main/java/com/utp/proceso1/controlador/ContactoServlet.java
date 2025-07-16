@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet("/ContactoServlet")
 public class ContactoServlet extends HttpServlet {
@@ -47,5 +48,14 @@ public class ContactoServlet extends HttpServlet {
             e.printStackTrace();
             response.sendRedirect("contacto.jsp?error=Error+de+sistema");
         }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+                ContactoDAO contactoDAO = new ContactoDAO();
+                List<Contacto> contactos = contactoDAO.getContactos();
+                req.setAttribute("contactosList", contactos);
+                req.getRequestDispatcher("mensajes.jsp").forward(req, resp);
     }
 }
