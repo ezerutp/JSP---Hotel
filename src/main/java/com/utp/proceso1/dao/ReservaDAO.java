@@ -89,7 +89,7 @@ public class ReservaDAO {
             stmp.setString(10, reserva.getEstadoReserva().name());
             stmp.setTimestamp(11, new java.sql.Timestamp(reserva.getFechaReserva().getTime()));
             stmp.setString(12, reserva.getNotas());
-            stmp.setInt(13, reserva.getIdReserva());
+            stmp.setInt(13, reserva.getId());
             stmp.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -114,8 +114,8 @@ public class ReservaDAO {
     // MAPEO
     private Reserva mapReserva(ResultSet rs) throws Exception {
         Reserva reserva = new Reserva();
-        reserva.setIdReserva(rs.getInt("id_reserva"));
-        
+        reserva.setId(rs.getInt("id_reserva"));
+
         // Obtener la habitación usando el DAO correspondiente
         int idHabitacion = rs.getInt("id_habitacion");
         HabitacionDAO habitacionDAO = new HabitacionDAO();

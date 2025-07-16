@@ -30,7 +30,7 @@ public class ReservaServlet extends HttpServlet {
             isNullOrEmpty(request.getParameter("fecha_checkout")) ||
             isNullOrEmpty(request.getParameter("cantidad_personas"))) {
             request.setAttribute("error", "Campos obligatorios faltantes");
-            request.getRequestDispatcher("/reservar").forward(request, response);
+            request.getRequestDispatcher("/reservar.jsp").forward(request, response);
             return;
         }
 
@@ -54,7 +54,7 @@ public class ReservaServlet extends HttpServlet {
             // Verificar si es que el checkout es antes del checkin
             if (!checkout.after(checkin)) {
             request.setAttribute("error", "Fechas inválidas");
-            request.getRequestDispatcher("/reservar").forward(request, response);
+            request.getRequestDispatcher("/reservar.jsp").forward(request, response);
             return;
             }
 
@@ -95,16 +95,16 @@ public class ReservaServlet extends HttpServlet {
                 request.getRequestDispatcher("/reservaExitosa.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "Error al actualizar estado de habitación");
-                request.getRequestDispatcher("/reservar").forward(request, response);
+                request.getRequestDispatcher("/reservar.jsp").forward(request, response);
             }
             } else {
             request.setAttribute("error", "Error al registrar reserva");
-            request.getRequestDispatcher("/reservar").forward(request, response);
+            request.getRequestDispatcher("/reservar.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Error del sistema");
-            request.getRequestDispatcher("/reservar").forward(request, response);
+            request.getRequestDispatcher("/reservar.jsp").forward(request, response);
         }
     }
 

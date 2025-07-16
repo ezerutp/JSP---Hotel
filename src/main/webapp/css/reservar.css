@@ -33,27 +33,27 @@
 }
 
 .bg-image:nth-child(1) {
-    background-image: url('imagenes/Machu_Picchu_maravilla_del_mundo.jpg');
+    background-image: url('../imagenes/Machu_Picchu_maravilla_del_mundo.jpg');
 }
 
 .bg-image:nth-child(2) {
-    background-image: url('imagenes/Plaza-de-Armas-Cusco.jpg');
+    background-image: url('../imagenes/Plaza-de-Armas-Cusco.jpg');
 }
 
 .bg-image:nth-child(3) {
-    background-image: url('imagenes/valle_sagrado.jpg');
+    background-image: url('../imagenes/valle_sagrado.jpg');
 }
 
 .bg-image:nth-child(4) {
-    background-image: url('imagenes/montaña7colores.jpg');
+    background-image: url('../imagenes/montaña7colores.jpg');
 }
 
 .bg-image:nth-child(5) {
-    background-image: url('imagenes/cuzco1.jpg');
+    background-image: url('../imagenes/cuzco1.jpg');
 }
 
 .bg-image:nth-child(6) {
-    background-image: url('imagenes/sacsa.jpg');
+    background-image: url('../imagenes/sacsa.jpg');
 }
 
 .form-shadow {
