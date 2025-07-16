@@ -239,10 +239,15 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center space-x-2">
-                                            <button class="text-blue-600 hover:text-blue-900 view-btn" data-id="1">
+                                            <button class="text-blue-600 hover:text-blue-900 view-btn" 
+                                                    data-id="${c.id}"
+                                                    data-nombre="${c.nombreCompleto}"
+                                                    data-correo="${c.correo}"
+                                                    data-fecha="${c.fechaEnvio}"
+                                                    data-mensaje="${c.mensaje}">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <button class="text-green-600 hover:text-green-900 reply-btn" data-id="1">
+                                            <button class="text-green-600 hover:text-green-900 reply-btn" data-id="${c.id}">
                                                 <i class="fas fa-reply"></i>
                                             </button>
                                         </div>
@@ -279,13 +284,12 @@
                                 <span class="text-white font-bold">PM</span>
                             </div>
                             <div>
-                                <div class="font-medium text-gray-900">Pedro Martínez</div>
-                                <div class="text-sm text-gray-500">pedro.martinez@email.com</div>
+                                <div class="font-medium text-gray-900" id="nombreCompleto">Pedro Martínez</div>
+                                <div class="text-sm text-gray-500" id="correo"></div>
                             </div>
                         </div>
                         <div class="text-sm text-gray-500">
-                            <div>10/07/2025</div>
-                            <div>14:30</div>
+                            <div id="fecha"></div>
                         </div>
                     </div>
                     
@@ -298,11 +302,7 @@
                         </div>
                         
                         <div class="bg-gray-50 p-4 rounded-lg">
-                            <p class="text-gray-700">
-                                Hola, me gustaría saber si tienen disponibilidad para el próximo fin de semana (sábado 13 y domingo 14 de julio). 
-                                Somos una pareja y nos interesa una habitación con vista al mar. También nos gustaría conocer los precios y 
-                                qué servicios incluyen. Esperamos su pronta respuesta.
-                            </p>
+                            <p class="text-gray-700" id="mensaje"></p>
                         </div>
                     </div>
                     
