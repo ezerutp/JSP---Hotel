@@ -68,7 +68,7 @@
                     <i class="fas fa-envelope w-5 h-5 mr-3"></i>
                     Mensajes
                 </a>
-                <a href="reportes" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <a href="reportes.jsp" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
                     Reportes
                 </a>
@@ -261,7 +261,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900"><fmt:formatDate value="${c.fechaEnvio}" pattern="yyyy-MM-dd HH:mm" /></div>
+                                        <div class="text-sm text-gray-900"><fmt:formatDate value="${c.fechaEnvio}" pattern="yyyy/MM/dd HH:mm" /></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
