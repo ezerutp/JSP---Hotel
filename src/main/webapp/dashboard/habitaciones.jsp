@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <!DOCTYPE html>
     <html lang="es">
 
@@ -185,7 +186,7 @@
                             <c:forEach var="habitacion" items="${habitaciones}">
                                 <div class="bg-white rounded-lg shadow-md overflow-hidden room-card">
                                     <div class="relative">
-                                        <img src="https://picsum.photos/400/300?random=${habitacion.id}" alt="Habitación"
+                                        <img src="${pageContext.request.contextPath}/imagenes/${fn:replace(habitacion.tipoHabitacion.nombre, ' ', '')}.jpg" 
                                             class="w-full h-48 object-cover">
                                         <div class="absolute top-2 right-2">
                                             <span
@@ -206,6 +207,7 @@
                                     <div class="p-4">
                                         <div class="flex items-center justify-between mb-2">
                                             <h3 class="text-lg font-semibold text-gray-800">Habitación ${habitacion.numeroHabitacion}</h3>
+                                            <span class="text-xs"><b>Imagen Referencial</b></span>
                                         </div>
                                         <p class="text-sm text-gray-600 mb-2">Habitación ${habitacion.tipoHabitacion.nombre}</p>
                                         <div class="flex items-center justify-between mb-3">

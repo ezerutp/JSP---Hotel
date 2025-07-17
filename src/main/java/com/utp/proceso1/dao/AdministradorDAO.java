@@ -129,7 +129,7 @@ public class AdministradorDAO {
     }
 
     public Administrador validarCredenciales(String usuario, String contrasena) {
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ? AND contrasena = ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE usuario = ? AND contrasena = ? AND estado = 1";
         try (PreparedStatement stmp = connection.prepareStatement(sql)) {
             stmp.setString(1, usuario);
             stmp.setString(2, contrasena);

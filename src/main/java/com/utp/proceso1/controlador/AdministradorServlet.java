@@ -65,7 +65,7 @@ public class AdministradorServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/dashboard/empleados");
             }
         } else {
-            mensajeError = "Usuario o contraseña incorrectos.";
+            mensajeError = "Usuario o contraseña incorrectos.\nNo tienes permisos para acceder";
             request.setAttribute("error", mensajeError);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
