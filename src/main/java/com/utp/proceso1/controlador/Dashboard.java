@@ -1,27 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.utp.proceso1.controlador;
 
-import com.utp.proceso1.dao.AdministradorDAO;
-import com.utp.proceso1.dao.ContactoDAO;
-import com.utp.proceso1.dao.HabitacionDAO;
-import com.utp.proceso1.dao.ReservaDAO;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.utp.proceso1.modelo.Administrador;
-import com.utp.proceso1.modelo.Habitacion;
-import java.util.List;
 
-/**
- *
- * @author Franco
- */
+import com.utp.proceso1.dao.AdministradorDAO;
+import com.utp.proceso1.dao.ContactoDAO;
+import com.utp.proceso1.dao.HabitacionDAO;
+import com.utp.proceso1.dao.ReservaDAO;
 
 @WebServlet("/dashboard/")
 public class Dashboard extends HttpServlet {

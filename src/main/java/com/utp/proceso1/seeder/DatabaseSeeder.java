@@ -120,17 +120,7 @@ public class DatabaseSeeder implements ServletContextListener {
                 new Habitacion("107", estadoHabitacion.DISPONIBLE),
                 new Habitacion("108", estadoHabitacion.DISPONIBLE),
                 new Habitacion("109", estadoHabitacion.DISPONIBLE),
-                new Habitacion("110", estadoHabitacion.DISPONIBLE),
-                new Habitacion("111", estadoHabitacion.DISPONIBLE),
-                new Habitacion("112", estadoHabitacion.DISPONIBLE),
-                new Habitacion("113", estadoHabitacion.DISPONIBLE),
-                new Habitacion("114", estadoHabitacion.DISPONIBLE),
-                new Habitacion("115", estadoHabitacion.DISPONIBLE),
-                new Habitacion("116", estadoHabitacion.DISPONIBLE),
-                new Habitacion("117", estadoHabitacion.DISPONIBLE),
-                new Habitacion("118", estadoHabitacion.DISPONIBLE),
-                new Habitacion("119", estadoHabitacion.DISPONIBLE),
-                new Habitacion("120", estadoHabitacion.DISPONIBLE));
+                new Habitacion("110", estadoHabitacion.DISPONIBLE));
 
         for (Habitacion hab : habitaciones) {
             Habitacion existingHabitacion = habitacionDAO.getHabitacionByNumero(hab.getNumeroHabitacion());
